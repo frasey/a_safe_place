@@ -8,8 +8,25 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
+  final TextEditingController textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                  controller: textEditingController,
+                  decoration: const InputDecoration(
+                    hintText: 'Event title',
+                  )),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
