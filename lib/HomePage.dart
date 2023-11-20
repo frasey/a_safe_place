@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MenuTile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,6 +31,26 @@ class HomePage extends StatelessWidget {
             },
           )
         ],
+      ),
+
+      // ** HAMBURGER MENU **
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              child: const Text('Menu'),
+              decoration: BoxDecoration(color: Colors.blueGrey),
+            ),
+            MenuTile(title: 'Home'),
+            MenuTile(title: 'Profile'),
+            MenuTile(title: 'Your tags'),
+            MenuTile(title: 'Your docs/images'),
+            MenuTile(title: 'All events'),
+            MenuTile(title: 'Create new event'),
+            MenuTile(title: 'Log out')
+          ],
+        ),
       ),
     );
   }
