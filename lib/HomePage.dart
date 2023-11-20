@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'A Safe Place',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -21,6 +22,14 @@ class HomePage extends StatelessWidget {
             },
           );
         }),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              //OPEN PROFILE PAGE HERE
+            },
+          )
+        ],
       ),
     );
   }
