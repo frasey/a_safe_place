@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MenuTile.dart';
+import 'Event.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,51 +8,58 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'A Safe Place',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        leading: Builder(builder: (BuildContext context) {
-          // leading is for a widget to display before the appBar's title
-          return IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              // CALL DRAWER OPEN FUNTION HERE
-              Scaffold.of(context).openDrawer();
-            },
-          );
-        }),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              //OPEN PROFILE PAGE HERE
-            },
-          )
-        ],
-      ),
-
-      // ** HAMBURGER MENU **
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              child: const Text('Menu'),
-              decoration: BoxDecoration(color: Colors.blueGrey),
-            ),
-            MenuTile(title: 'Home'),
-            MenuTile(title: 'Profile'),
-            MenuTile(title: 'Your tags'),
-            MenuTile(title: 'Your docs/images'),
-            MenuTile(title: 'All events'),
-            MenuTile(title: 'Create new event'),
-            MenuTile(title: 'Log out')
+        // APPBAR
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'A Safe Place',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          leading: Builder(builder: (BuildContext context) {
+            // leading is for a widget to display before the appBar's title
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                // CALL DRAWER OPEN FUNTION HERE
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          }),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.person),
+              onPressed: () {
+                //OPEN PROFILE PAGE HERE
+              },
+            )
           ],
         ),
-      ),
-    );
+
+        // ** HAMBURGER MENU **
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                child: const Text('Menu'),
+                decoration: BoxDecoration(color: Colors.blueGrey),
+              ),
+              MenuTile(title: 'Home'),
+              MenuTile(title: 'Profile'),
+              MenuTile(title: 'Your tags'),
+              MenuTile(title: 'Your docs/images'),
+              MenuTile(title: 'All events'),
+              MenuTile(title: 'Create new event'),
+              MenuTile(title: 'Log out')
+            ],
+          ),
+        ),
+
+        // HOMEPAGE BODY
+        body: const Column(
+          children: [
+            // Event(),         OR EVENT PREVIEW?
+          ],
+        ));
   }
 }
