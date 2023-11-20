@@ -5,9 +5,22 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child:
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'A Safe Place',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: Builder(builder: (BuildContext context) {
+          // leading is for a widget to display before the appBar's title
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              // CALL DRAWER OPEN FUNTION HERE
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        }),
       ),
     );
   }
