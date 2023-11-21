@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MenuTile.dart';
-import 'Event.dart';
+import '../Events/Event.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -41,8 +41,8 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: const <Widget>[
               DrawerHeader(
-                child: const Text('Menu'),
                 decoration: BoxDecoration(color: Colors.blueGrey),
+                child: Text('Menu'),
               ),
               MenuTile(title: 'Home'),
               MenuTile(title: 'Profile'),
