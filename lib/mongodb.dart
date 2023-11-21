@@ -10,5 +10,6 @@ class MongoDatabase {
     var status = db.serverStatus();
     print(status);
     var collection = db.collection(COLLECTION_NAME);
+    // print(await collection.find().toList());     checks sucessfully connected with no errors
   }
 }
