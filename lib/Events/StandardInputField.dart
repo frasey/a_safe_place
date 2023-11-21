@@ -9,6 +9,9 @@ class StandardInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController textEditingController = TextEditingController();
+
     const border = OutlineInputBorder(
       borderSide: BorderSide(
         width: 2.0,
@@ -19,6 +22,7 @@ class StandardInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        controller: textEditingController,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           hintText: name,
