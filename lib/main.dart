@@ -1,9 +1,11 @@
 import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Homepage/HomePage.dart';
 import 'Events/Event.dart';
 
 Future<void> main() async {
+  await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
   runApp(const MyApp());
