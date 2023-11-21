@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MenuTile.dart';
-import 'Event.dart';
+import '../Events/Event.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
