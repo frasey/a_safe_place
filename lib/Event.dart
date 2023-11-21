@@ -1,177 +1,88 @@
-// import 'package:flutter/material.dart';
+import 'package:a_safe_place/StandardInputField.dart';
+import 'package:flutter/material.dart';
 
-// class Event extends StatefulWidget {
-//   const Event({super.key});
+final _formKey = GlobalKey<FormState>();
 
-//   @override
-//   State<Event> createState() => _EventState();
-// }
+class Event extends StatelessWidget {
+  const Event({Key? key}) : super(key: key);
 
-// class _EventState extends State<Event> {
-//   final TextEditingController textEditingController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    const border = OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 2.0,
+        style: BorderStyle.solid,
+      ),
+    );
 
-//   @override
-//   Widget build(BuildContext context) {
-//     const border = OutlineInputBorder(
-//       borderSide: BorderSide(
-//         width: 2.0,
-//         style: BorderStyle.solid,
-//       ),
-//     );
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SafeArea(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SingleChildScrollView(scrollDirection: Axis.vertical),
+                // EVENT TITLE
+                const StandardInputField(
+                    name: 'Event title', keyboardType: TextInputType.text),
+                // DATE * TIME
+                const StandardInputField(
+                    name: 'Date and Time',
+                    keyboardType: TextInputType.datetime),
+                // LOCATION
+                const StandardInputField(
+                    name: 'Location', keyboardType: TextInputType.text),
+                // DESCRIPTION
+                const StandardInputField(
+                    name: 'Description', keyboardType: TextInputType.multiline),
+                // REMINDER - PLACEHOLDER
+                const StandardInputField(
+                    name: 'Reminder', keyboardType: TextInputType.text),
+                // CONTACT NAME
+                const StandardInputField(
+                    name: 'Contact name', keyboardType: TextInputType.text),
+                // CONTACT NUMBER
+                const StandardInputField(
+                    name: 'Contact number', keyboardType: TextInputType.phone),
+                // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                const StandardInputField(
+                    name: 'Upload docs/images',
+                    keyboardType: TextInputType.text),
 
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Column(
-//           children: [
-//             // EVENT TITLE
-//             Padding(
-//               padding: const EdgeInsets.all(10),
-//               child: SizedBox(
-//                 height: 50,
-//                 child: TextField(
-//                   controller: textEditingController,
-//                   decoration: const InputDecoration(
-//                     hintText: 'Event title',
-//                     hintStyle: TextStyle(
-//                       fontSize: 20,
-//                     ),
-//                     filled: true,
-//                     fillColor:
-//                         Colors.white, // MIGHT WANT TO CHANGE THIS IF SET THEME
-//                     contentPadding: EdgeInsets.all(5),
-//                     focusedBorder: border,
-//                     enabledBorder: border,
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.all(Radius.circular(5)),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
+                // ELEVATED BUTTON
+                ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Great!'),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Validate')),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-//             // DATE & TIME
+// CONTACT NAME
+                // Row(children: <Widget> [
 
-//             // LOCATION
-//             Padding(
-//               padding: const EdgeInsets.all(10),
-//               child: SizedBox(
-//                 height: 50,
-//                 child: TextField(
-//                   controller: textEditingController,
-//                   decoration: const InputDecoration(
-//                     hintText: 'Location',
-//                     hintStyle: TextStyle(
-//                       fontSize: 20,
-//                     ),
-//                     filled: true,
-//                     fillColor:
-//                         Colors.white, // MIGHT WANT TO CHANGE THIS IF SET THEME
-//                     contentPadding: EdgeInsets.all(5),
-//                     focusedBorder: border,
-//                     enabledBorder: border,
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.all(Radius.circular(5)),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
+                // TextFormField(validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return 'Enter something';
+                //   }
+                //   return null;
+                // }),
 
-//             // DESCRIPTION  - NEEDS TO BE MULTI LINE
-//             Padding(
-//               padding: const EdgeInsets.all(10),
-//               child: SizedBox(
-//                 height: 150,
-//                 child: TextField(
-//                   controller: textEditingController,
-//                   keyboardType: TextInputType.multiline,
-//                   maxLines: null,
-//                   decoration: const InputDecoration(
-//                     hintText: 'Decription',
-//                     hintStyle: TextStyle(
-//                       fontSize: 20,
-//                     ),
-//                     filled: true,
-//                     fillColor:
-//                         Colors.white, // MIGHT WANT TO CHANGE THIS IF SET THEME
-//                     contentPadding: EdgeInsets.all(5),
-//                     focusedBorder: border,
-//                     enabledBorder: border,
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.all(Radius.circular(5)),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
 
-//             // TAGS
-
-//             // REMINDER
-
-//             // CONTACT NAME
-//             Row(
-//               children: [
-//                 Padding(
-//                   padding: const EdgeInsets.all(10),
-//                   child: SizedBox(
-//                     height: 50,
-//                     child: TextField(
-//                       controller: textEditingController,
-//                       decoration: const InputDecoration(
-//                         hintText: 'Contact Name',
-//                         hintStyle: TextStyle(
-//                           fontSize: 20,
-//                         ),
-//                         filled: true,
-//                         fillColor: Colors
-//                             .white, // MIGHT WANT TO CHANGE THIS IF SET THEME
-//                         contentPadding: EdgeInsets.all(5),
-//                         focusedBorder: border,
-//                         enabledBorder: border,
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.all(Radius.circular(5)),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-
-//                 // CONTACT NUMBER
-//                 Padding(
-//                   padding: const EdgeInsets.all(10),
-//                   child: SizedBox(
-//                     height: 50,
-//                     child: TextField(
-//                       controller: textEditingController,
-//                       keyboardType: TextInputType.phone,
-//                       decoration: const InputDecoration(
-//                         hintText: 'Contact Number',
-//                         hintStyle: TextStyle(
-//                           fontSize: 20,
-//                         ),
-//                         filled: true,
-//                         fillColor: Colors
-//                             .white, // MIGHT WANT TO CHANGE THIS IF SET THEME
-//                         contentPadding: EdgeInsets.all(5),
-//                         focusedBorder: border,
-//                         enabledBorder: border,
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.all(Radius.circular(5)),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-
-//             // UPLOAD IMAGES
-
-//             // CAROSEL
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+                // ]
+                // ),
