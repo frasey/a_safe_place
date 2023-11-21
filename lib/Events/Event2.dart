@@ -1,18 +1,18 @@
 import 'package:a_safe_place/Events/StandardInputField.dart';
+import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:flutter/material.dart';
 
-
-
-class Event extends StatefulWidget {
-  Event({Key? key}) : super(key: key);
+class Event2 extends StatefulWidget {
+  const Event2 ({Key? key}) : super(key: key);
 
   @override
-  _CreateEventState createState() => _CreateEventState();
+  _CreateEventState<> createState() => _CreateEventState();
+}
 
-  class _CreateEventState extends State<Event>
+class _CreateEventState extends State<Event2> {
 
   final _formKey = GlobalKey<FormState>();   // handles the validator
-
+  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     const border = OutlineInputBorder(
@@ -22,6 +22,8 @@ class Event extends StatefulWidget {
       ),
     );
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -63,6 +65,7 @@ class Event extends StatefulWidget {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                        collection.insertMany()
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Great!'),
@@ -70,7 +73,7 @@ class Event extends StatefulWidget {
                         );
                       }
                     },
-                    child: const Text('Validate')),
+                    child: const Text('Save')),
               ],
             ),
           ),
@@ -79,17 +82,3 @@ class Event extends StatefulWidget {
     );
   }
 }
-
-// CONTACT NAME
-                // Row(children: <Widget> [
-
-                // TextFormField(validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return 'Enter something';
-                //   }
-                //   return null;
-                // }),
-
-
-                // ]
-                // ),
