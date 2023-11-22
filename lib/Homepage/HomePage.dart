@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MenuTile.dart';
-import '../Events/OLD.dart';
+import '../Events/Event.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             return IconButton(
               icon: const Icon(Icons.menu),
               onPressed: () {
-                // CALL DRAWER OPEN FUNTION HERE
+                // CALL DRAWER OPEN FUNCTION HERE
                 Scaffold.of(context).openDrawer();
               },
             );
@@ -56,9 +56,31 @@ class HomePage extends StatelessWidget {
         ),
 
         // HOMEPAGE BODY
-        body: const Column(
+        body:  Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Event(),         OR EVENT PREVIEW?
+            // NEXT EVENT PREVIEW
+            const Placeholder(
+              fallbackHeight: 80,
+              fallbackWidth: 150,
+            ),
+            //
+            ElevatedButton(
+                onPressed: () {},
+                child: const Text('Create new event'),
+            ),
+
+            // SEE ALL EVENTS
+            ElevatedButton(
+                onPressed: () {},
+                child: const Text('Show all events'),
+            ),
+
+            // NOTES
+            const Placeholder(
+              fallbackHeight: 80,
+              fallbackWidth: 150,
+            ),
           ],
         ));
   }
