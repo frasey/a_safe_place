@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'MenuTile.dart';
 import '../Events/Event.dart';
 
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
         ),
 
         // HOMEPAGE BODY
-        body:  Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // NEXT EVENT PREVIEW
@@ -66,16 +67,26 @@ class HomePage extends StatelessWidget {
             ),
             //
             ElevatedButton(
-                onPressed: () {},
-                child: const Text('Create new event'),
+              child: const Text('Create new event'),
+              onPressed: () => Navigator.of(context).push(PageTransition(
+                type: PageTransitionType.rightToLeftJoined,
+                childCurrent: this,
+                duration: const Duration(milliseconds: 600),
+                reverseDuration: const Duration(milliseconds: 600),
+                child: const Event(),
+              )),
             ),
-
             // SEE ALL EVENTS
             ElevatedButton(
-                onPressed: () {},
-                child: const Text('Show all events'),
+              child: const Text('Show all events'),
+              onPressed: () => Navigator.of(context).push(PageTransition(
+                type: PageTransitionType.rightToLeftJoined,
+                childCurrent: this,
+                duration: const Duration(milliseconds: 600),
+                reverseDuration: const Duration(milliseconds: 600),
+                child: const HomePage(),
+              )),
             ),
-
             // NOTES
             const Placeholder(
               fallbackHeight: 80,
