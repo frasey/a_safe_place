@@ -1,26 +1,33 @@
 import 'package:a_safe_place/Events/StandardInputField.dart';
+import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Event extends StatefulWidget {
-  Event({Key? key}) : super(key: key);
+  const Event ({Key? key}) : super(key: key);
 
   @override
-  _CreateEventState createState() => _CreateEventState();
+  State<Event> createState() => _EventState();
+}
 
-  class _CreateEventState extends State<Event>
+class _EventState extends State<Event> {
 
+  @override
+  void initState() {
+    super.initState();
+    print("initState");
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      print("WidgetsBinding");
+       // await MongoDatabase.connect();
+      print("post db");
+
+    });
+  }
+  
   final _formKey = GlobalKey<FormState>();   // handles the validator
 
   @override
   Widget build(BuildContext context) {
-    const border = OutlineInputBorder(
-      borderSide: BorderSide(
-        width: 2.0,
-        style: BorderStyle.solid,
-      ),
-    );
+    print("build");
 
     return Scaffold(
       body: Padding(
@@ -30,6 +37,11 @@ class Event extends StatefulWidget {
             key: _formKey,
             child: Column(
               children: [
+                const Text("Create New",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 const SingleChildScrollView(scrollDirection: Axis.vertical),
                 // EVENT TITLE
                 const StandardInputField(
@@ -63,6 +75,7 @@ class Event extends StatefulWidget {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                        // collection.insertMany()
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Great!'),
@@ -70,7 +83,7 @@ class Event extends StatefulWidget {
                         );
                       }
                     },
-                    child: const Text('Validate')),
+                    child: const Text('Save')),
               ],
             ),
           ),
@@ -80,16 +93,8 @@ class Event extends StatefulWidget {
   }
 }
 
-// CONTACT NAME
-                // Row(children: <Widget> [
-
-                // TextFormField(validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return 'Enter something';
-                //   }
-                //   return null;
-                // }),
-
-
-                // ]
-                // ),
+// TODO stop form overflow
+// TODO alter description field to larger size
+// TODO reminders
+// TODO image uploads
+// TODO save to db
