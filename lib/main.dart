@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'A Safe Place',
-      home: HomePage(),
+      home: Event(),
+      // home: HomePage(),
     );
   }
 }

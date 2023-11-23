@@ -1,6 +1,8 @@
 import 'package:a_safe_place/Events/StandardInputField.dart';
 import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:flutter/material.dart';
+import 'package:a_safe_place/Tags/Tag.dart';
+import 'package:a_safe_place/Tags/tag_dialog.dart';
 
 class Event extends StatefulWidget {
   const Event ({Key? key}) : super(key: key);
@@ -69,6 +71,16 @@ class _EventState extends State<Event> {
                 const StandardInputField(
                     name: 'Upload docs/images',
                     keyboardType: TextInputType.text),
+
+                ElevatedButton(
+                  onPressed: () async {
+                    Tag? newTag = await showAddTagDialog(context);
+                    if (newTag != null) {
+                      print("New Tag: ${newTag.name}");
+                    }
+                  },
+                  child: const Text('Add Tag'),
+                ),
 
                 // ELEVATED BUTTON
                 ElevatedButton(
