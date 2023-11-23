@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:a_safe_place/Events/StandardInputField.dart';
 import 'package:a_safe_place/Database/mongodb.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:a_safe_place/Tags/Tag.dart';
+import 'package:a_safe_place/Tags/tag_dialog.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Event extends StatefulWidget {
-  const Event ({Key? key}) : super(key: key);
+  const Event({Key? key}) : super(key: key);
 
   @override
   State<Event> createState() => _EventState();
@@ -27,13 +34,12 @@ class _EventState extends State<Event> {
     print("initState");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       print("WidgetsBinding");
-       // await MongoDatabase.connect();
+      // await MongoDatabase.connect();
       print("post db");
-
     });
   }
-  
-  final _formKey = GlobalKey<FormState>();   // handles the validator
+
+  final _formKey = GlobalKey<FormState>(); // handles the validator
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +53,8 @@ class _EventState extends State<Event> {
             key: _formKey,
             child: Column(
               children: [
-                const Text("Create New",
+                const Text(
+                  "Create New",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -69,6 +76,27 @@ class _EventState extends State<Event> {
                 StandardInputField(name: 'Contact number', keyboardType: TextInputType.phone, maxLines: 1, controller: contactNumberController),
                 // UPLOAD DOCS/IMAGES - PLACEHOLDER
                 StandardInputField(name: 'upload', keyboardType: TextInputType.text, maxLines: 1, controller: uploadController),
+                
+                ElevatedButton(
+                  child: const Text('Attach File or Photo to Event'),
+                  onPressed: () async {
+                    final result = await FilePicker.platform.pickFiles();
+                    if (result == null) return;
+
+                    final file = result.files.first;
+                    final newFile = await saveFilePermanently(file);
+                  },
+                ),
+
+                ElevatedButton(
+                  onPressed: () async {
+                    Tag? newTag = await showAddTagDialog(context);
+                    if (newTag != null) {
+                      print("New Tag: ${newTag.name}");
+                    }
+                  },
+                  child: const Text('Add Tag'),
+                ),
 
                 // ELEVATED BUTTON
                 ElevatedButton(
@@ -92,6 +120,17 @@ class _EventState extends State<Event> {
         ),
       ),
     );
+  }
+
+  // needs path_provider dep in pubspec.yaml
+  Future<File> saveFilePermanently(PlatformFile file) async {
+    final appStorage = await getApplicationDocumentsDirectory();
+    final newFile = File('${appStorage.path}/${file.name}');
+    return File(file.path!).copy(newFile.path);
+  }
+
+  void openFile(PlatformFile file) {
+    OpenFile.open(file.path);
   }
 }
 

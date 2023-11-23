@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Homepage/HomePage.dart';
 
- void main() async {     // Future<void>
+void main() async {
+  // Future<void>
 //   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -15,13 +16,13 @@ import 'Homepage/HomePage.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'A Safe Place',
       home: Event(),
+      // home: HomePage(),
     );
   }
 }
