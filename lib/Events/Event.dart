@@ -5,6 +5,7 @@ import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _EventState extends State<Event> {
                     name: 'Contact number', keyboardType: TextInputType.phone),
                 // UPLOAD DOCS/IMAGES - PLACEHOLDER
                 ElevatedButton(
-                  child: Text('Attach File or Photo to Event'),
+                  child: const Text('Attach File or Photo to Event'),
                   onPressed: () async {
                     final result = await FilePicker.platform.pickFiles();
                     if (result == null) return;

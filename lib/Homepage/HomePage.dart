@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
                 childCurrent: this,
                 duration: const Duration(milliseconds: 600),
                 reverseDuration: const Duration(milliseconds: 600),
-                child: const HomePage(),
+                child: const Event(),
               )),
             ),
             // SEE ALL EVENTS
