@@ -4,7 +4,7 @@ class StandardInputField extends StatelessWidget {
   final String name;
   final TextInputType keyboardType;
   final int? maxLines;
-  final TextEditingController controller
+  final TextEditingController controller;
 
   const StandardInputField(
       {super.key, required this.name, required this.keyboardType, required this.maxLines, required this.controller});
