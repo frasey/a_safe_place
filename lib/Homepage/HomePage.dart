@@ -65,7 +65,12 @@ class HomePage extends StatelessWidget {
               fallbackHeight: 80,
               fallbackWidth: 150,
             ),
-            //
+            // When functionality for the above section has been added, include below code for route animation:
+            // onPressed: () => Navigator.of(context).push(PageTransition(
+            //                 type: PageTransitionType.scale,
+            //                 alignment: Alignment.topCenter,
+            //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
+
             ElevatedButton(
               child: const Text('Create new event'),
               onPressed: () => Navigator.of(context).push(PageTransition(
@@ -73,7 +78,7 @@ class HomePage extends StatelessWidget {
                 childCurrent: this,
                 duration: const Duration(milliseconds: 600),
                 reverseDuration: const Duration(milliseconds: 600),
-                child: const Event(),
+                child: const HomePage(),
               )),
             ),
             // SEE ALL EVENTS
