@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class StandardInputField extends StatelessWidget {
   final String name;
   final TextInputType keyboardType;
+  final int? maxLines;
+  
 
   const StandardInputField(
-      {super.key, required this.name, required this.keyboardType});
+      {super.key, required this.name, required this.keyboardType, required this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class StandardInputField extends StatelessWidget {
       child: TextFormField(
         controller: textEditingController,
         keyboardType: keyboardType,
+        maxLines: maxLines,
         decoration: InputDecoration(
           hintText: name,
           hintStyle: const TextStyle(
