@@ -18,7 +18,6 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
-
   final TextEditingController titleController = TextEditingController();
   final TextEditingController dateAndTimeController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -51,70 +50,102 @@ class _EventState extends State<Event> {
         child: SafeArea(
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                const Text(
-                  "Create New",
-                  style: TextStyle(
-                    fontSize: 20,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                    "Create New",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                const SingleChildScrollView(scrollDirection: Axis.vertical),
-                // EVENT TITLE
-                StandardInputField(name: 'Title', keyboardType: TextInputType.text, maxLines: 1, controller: titleController),
-                // DATE * TIME
-                StandardInputField(name: 'DD/MM/YYYY 00:00', keyboardType: TextInputType.datetime, maxLines: 1, controller: dateAndTimeController),
-                // LOCATION
-                StandardInputField(name: 'Location', keyboardType: TextInputType.multiline, maxLines: 2, controller: locationController),
-                // DESCRIPTION
-                StandardInputField(name: 'Description', keyboardType: TextInputType.multiline, maxLines: 5, controller: descriptionController),
-                // REMINDER - PLACEHOLDER
-                StandardInputField(name: 'Reminder', keyboardType: TextInputType.text, maxLines: 1, controller: reminderController),
-                // CONTACT NAME
-                StandardInputField(name: 'Contact name', keyboardType: TextInputType.text, maxLines: 1, controller: contactNameController),
-                // CONTACT NUMBER
-                StandardInputField(name: 'Contact number', keyboardType: TextInputType.phone, maxLines: 1, controller: contactNumberController),
-                // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                StandardInputField(name: 'upload', keyboardType: TextInputType.text, maxLines: 1, controller: uploadController),
-                
-                ElevatedButton(
-                  child: const Text('Attach File or Photo to Event'),
-                  onPressed: () async {
-                    final result = await FilePicker.platform.pickFiles();
-                    if (result == null) return;
+                  StandardInputField(
+                      name: 'Title',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: titleController),
+                  // DATE * TIME
+                  StandardInputField(
+                      name: 'DD/MM/YYYY 00:00',
+                      keyboardType: TextInputType.datetime,
+                      maxLines: 1,
+                      controller: dateAndTimeController),
+                  // LOCATION
+                  StandardInputField(
+                      name: 'Location',
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 2,
+                      controller: locationController),
+                  // DESCRIPTION
+                  StandardInputField(
+                      name: 'Description',
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 5,
+                      controller: descriptionController),
+                  // REMINDER - PLACEHOLDER
+                  StandardInputField(
+                      name: 'Reminder',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: reminderController),
+                  // CONTACT NAME
+                  StandardInputField(
+                      name: 'Contact name',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: contactNameController),
+                  // CONTACT NUMBER
+                  StandardInputField(
+                      name: 'Contact number',
+                      keyboardType: TextInputType.phone,
+                      maxLines: 1,
+                      controller: contactNumberController),
+                  // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                  StandardInputField(
+                      name: 'upload',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: uploadController),
 
-                    final file = result.files.first;
-                    final newFile = await saveFilePermanently(file);
-                  },
-                ),
+                  ElevatedButton(
+                    child: const Text('Attach File or Photo to Event'),
+                    onPressed: () async {
+                      final result = await FilePicker.platform.pickFiles();
+                      if (result == null) return;
 
-                ElevatedButton(
-                  onPressed: () async {
-                    Tag? newTag = await showAddTagDialog(context);
-                    if (newTag != null) {
-                      print("New Tag: ${newTag.name}");
-                    }
-                  },
-                  child: const Text('Add Tag'),
-                ),
+                      final file = result.files.first;
+                      final newFile = await saveFilePermanently(file);
+                    },
+                  ),
 
-                // ELEVATED BUTTON
-                ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                        // setState(() {
-                        // Form.handler.saveAll(<all fields here>)}
-                        // collection.insertMany()
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Great!'),
-                          ),
-                        );
+                  ElevatedButton(
+                    onPressed: () async {
+                      Tag? newTag = await showAddTagDialog(context);
+                      if (newTag != null) {
+                        print("New Tag: ${newTag.name}");
                       }
                     },
-                    child: const Text('Save')),
-              ],
+                    child: const Text('Add Tag'),
+                  ),
+
+                  // ELEVATED BUTTON
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                          // setState(() {
+                          // Form.handler.saveAll(<all fields here>)}
+                          // collection.insertMany()
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Great!'),
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text('Save')),
+                ],
+              ),
             ),
           ),
         ),
