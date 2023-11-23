@@ -4,6 +4,7 @@ import 'package:a_safe_place/Events/StandardInputField.dart';
 import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:a_safe_place/Tags/Tag.dart';
 import 'package:a_safe_place/Tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
@@ -17,6 +18,16 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController dateAndTimeController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController reminderController = TextEditingController();
+  final TextEditingController contactNameController = TextEditingController();
+  final TextEditingController contactNumberController = TextEditingController();
+  final TextEditingController uploadController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -50,28 +61,22 @@ class _EventState extends State<Event> {
                 ),
                 const SingleChildScrollView(scrollDirection: Axis.vertical),
                 // EVENT TITLE
-                const StandardInputField(
-                    name: 'Event title', keyboardType: TextInputType.text),
+                StandardInputField(name: 'Title', keyboardType: TextInputType.text, maxLines: 1, controller: titleController),
                 // DATE * TIME
-                const StandardInputField(
-                    name: 'Date and Time',
-                    keyboardType: TextInputType.datetime),
+                StandardInputField(name: 'DD/MM/YYYY 00:00', keyboardType: TextInputType.datetime, maxLines: 1, controller: dateAndTimeController),
                 // LOCATION
-                const StandardInputField(
-                    name: 'Location', keyboardType: TextInputType.text),
+                StandardInputField(name: 'Location', keyboardType: TextInputType.multiline, maxLines: 2, controller: locationController),
                 // DESCRIPTION
-                const StandardInputField(
-                    name: 'Description', keyboardType: TextInputType.multiline),
+                StandardInputField(name: 'Description', keyboardType: TextInputType.multiline, maxLines: 5, controller: descriptionController),
                 // REMINDER - PLACEHOLDER
-                const StandardInputField(
-                    name: 'Reminder', keyboardType: TextInputType.text),
+                StandardInputField(name: 'Reminder', keyboardType: TextInputType.text, maxLines: 1, controller: reminderController),
                 // CONTACT NAME
-                const StandardInputField(
-                    name: 'Contact name', keyboardType: TextInputType.text),
+                StandardInputField(name: 'Contact name', keyboardType: TextInputType.text, maxLines: 1, controller: contactNameController),
                 // CONTACT NUMBER
-                const StandardInputField(
-                    name: 'Contact number', keyboardType: TextInputType.phone),
+                StandardInputField(name: 'Contact number', keyboardType: TextInputType.phone, maxLines: 1, controller: contactNumberController),
                 // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                StandardInputField(name: 'upload', keyboardType: TextInputType.text, maxLines: 1, controller: uploadController),
+                
                 ElevatedButton(
                   child: const Text('Attach File or Photo to Event'),
                   onPressed: () async {
@@ -98,6 +103,8 @@ class _EventState extends State<Event> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                        // setState(() {
+                        // Form.handler.saveAll(<all fields here>)}
                         // collection.insertMany()
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
