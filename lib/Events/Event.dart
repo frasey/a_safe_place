@@ -141,6 +141,7 @@ class _EventState extends State<Event> {
                               content: Text('Great!'),
                             ),
                           );
+                          _formKey.currentState!.reset();
                         }
                       },
                       child: const Text('Save')),
