@@ -48,7 +48,7 @@ class StandardInputField extends StatelessWidget {
           ? (value) {
           // validator will return the value of all the information entered in the text field
           if (value == null || value.isEmpty) {
-            return 'Enter something';
+            return 'Please enter $name';
           }
           return null;
         }

@@ -45,13 +45,13 @@ class _EventState extends State<Event> {
     print("build");
 
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(
           child: Form(
             key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
+            child: Column(
                 children: [
                   const Text(
                     "Create New",
@@ -60,16 +60,18 @@ class _EventState extends State<Event> {
                     ),
                   ),
                   StandardInputField(
-                      name: 'Title',
+                      name: 'Title (required)',
                       keyboardType: TextInputType.text,
                       maxLines: 1,
-                      controller: titleController),
+                      controller: titleController,
+                      requireValidation: true),
                   // DATE * TIME
                   StandardInputField(
-                      name: 'DD/MM/YYYY 00:00',
+                      name: 'DD/MM/YYYY 00:00 (required)',
                       keyboardType: TextInputType.datetime,
                       maxLines: 1,
-                      controller: dateAndTimeController),
+                      controller: dateAndTimeController,
+                      requireValidation: true),
                   // LOCATION
                   StandardInputField(
                       name: 'Location',
@@ -167,7 +169,8 @@ class _EventState extends State<Event> {
 }
 
 // TODO stop form overflow
-// TODO alter description field to larger size
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO need a vertical scroll
+// TODO make sure upload is included in form submission
