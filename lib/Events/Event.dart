@@ -26,6 +26,24 @@ class _EventState extends State<Event> {
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
+  PlatformFile? pickedFile;
+
+  Future uploadFile() async {
+    final path = 'files/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    // final ref = FirebaseStorage.instance.ref().child(path);
+    // ref.putFile(file);
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
 
   @override
   void initState() {
@@ -53,6 +71,17 @@ class _EventState extends State<Event> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  if (pickedFile != null)
+                    Expanded(
+                      child: Container(
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 32),
                   const Text(
                     "Create New",
                     style: TextStyle(
@@ -108,24 +137,28 @@ class _EventState extends State<Event> {
                       controller: uploadController),
 
                   ElevatedButton(
-                    child: const Text('Attach File or Photo to Event'),
-                    onPressed: () async {
-                      final result = await FilePicker.platform.pickFiles();
-                      if (result == null) return;
-
-                      final file = result.files.first;
-                      final newFile = await saveFilePermanently(file);
-                    },
+                    onPressed: selectFile,
+                    child: const Text('Select a File or Photo for Event'),
+                    // {
+                    //     final result = await FilePicker.platform.pickFiles();
+                    //     if (result == null) return;
+                    //
+                    //     final file = result.files.first;
+                    //     final newFile = await saveFilePermanently(file);
+                    //   },
                   ),
-
                   ElevatedButton(
-                    onPressed: () async {
-                      Tag? newTag = await showAddTagDialog(context);
-                      if (newTag != null) {
-                        print("New Tag: ${newTag.name}");
-                      }
-                    },
-                    child: const Text('Add Tag'),
+                    onPressed: uploadFile,
+                    child: const Text('Upload File or Photo to Event'),
+
+                    // ElevatedButton(
+                    //   onPressed: () async {
+                    //     Tag? newTag = await showAddTagDialog(context);
+                    //     if (newTag != null) {
+                    //       print("New Tag: ${newTag.name}");
+                    //     }
+                    //   },
+                    //   child: const Text('Add Tag'),
                   ),
 
                   // ELEVATED BUTTON

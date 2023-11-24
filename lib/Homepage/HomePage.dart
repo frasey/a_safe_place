@@ -76,8 +76,8 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.of(context).push(PageTransition(
                 type: PageTransitionType.rightToLeftJoined,
                 childCurrent: this,
-                duration: const Duration(milliseconds: 600),
-                reverseDuration: const Duration(milliseconds: 600),
+                duration: const Duration(milliseconds: 800),
+                reverseDuration: const Duration(milliseconds: 800),
                 child: const Event(),
               )),
             ),
@@ -87,8 +87,8 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.of(context).push(PageTransition(
                 type: PageTransitionType.rightToLeftJoined,
                 childCurrent: this,
-                duration: const Duration(milliseconds: 600),
-                reverseDuration: const Duration(milliseconds: 600),
+                duration: const Duration(milliseconds: 800),
+                reverseDuration: const Duration(milliseconds: 800),
                 child: const HomePage(),
               )),
             ),
