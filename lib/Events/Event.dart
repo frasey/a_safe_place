@@ -109,7 +109,7 @@ class _EventState extends State<Event> {
                   StandardInputField(
                       name: 'Description',
                       keyboardType: TextInputType.multiline,
-                      maxLines: 5,
+                      maxLines: 4,
                       controller: descriptionController),
                   // REMINDER - PLACEHOLDER
                   StandardInputField(
@@ -130,15 +130,27 @@ class _EventState extends State<Event> {
                       maxLines: 1,
                       controller: contactNumberController),
                   // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                  StandardInputField(
-                      name: 'upload',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: uploadController),
+                  // StandardInputField(
+                  //     name: 'upload',
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     controller: uploadController),
 
-                  ElevatedButton(
-                    onPressed: selectFile,
-                    child: const Text('Select a File or Photo for Event'),
+                  // UPLOAD BUTTONS
+                  const Text('Want to add a file?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+    ),
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child:
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                        onPressed: selectFile,
+                        child: const Text('Select'),
                     // {
                     //     final result = await FilePicker.platform.pickFiles();
                     //     if (result == null) return;
@@ -146,22 +158,27 @@ class _EventState extends State<Event> {
                     //     final file = result.files.first;
                     //     final newFile = await saveFilePermanently(file);
                     //   },
-                  ),
+                        ),
+                        ElevatedButton(
+                          onPressed: uploadFile,
+                          child: const Text('Upload'),
+                        ),
+                  ]
+                ),
+              ),
+
+                  // ADD TAGS BUTTON
                   ElevatedButton(
-                    onPressed: uploadFile,
-                    child: const Text('Upload File or Photo to Event'),
-
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     Tag? newTag = await showAddTagDialog(context);
-                    //     if (newTag != null) {
-                    //       print("New Tag: ${newTag.name}");
-                    //     }
-                    //   },
-                    //   child: const Text('Add Tag'),
+                        child: const Text('Add Tag'),
+                        onPressed: () async {
+                        Tag? newTag = await showAddTagDialog(context);
+                        if (newTag != null) {
+                          print("New Tag: ${newTag.name}");
+                        }
+                      },
                   ),
 
-                  // ELEVATED BUTTON
+                  // SAVE FORM
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -176,13 +193,14 @@ class _EventState extends State<Event> {
                           );
                         }
                       },
-                      child: const Text('Save')),
-                ],
-              ),
+                      child: const Text('Save'),
+                  ),
+                  ],
             ),
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -198,8 +216,6 @@ class _EventState extends State<Event> {
   }
 }
 
-// TODO stop form overflow
-// TODO alter description field to larger size
 // TODO reminders
 // TODO image uploads
 // TODO save to db
