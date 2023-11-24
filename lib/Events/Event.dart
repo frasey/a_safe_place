@@ -219,3 +219,5 @@ class _EventState extends State<Event> {
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO make upload/submit image form buttons smaller? or move tags somewhere else?
+// TODO make sure images are saving to the event and not just db
