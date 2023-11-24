@@ -5,8 +5,14 @@ import 'package:a_safe_place/Events/Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Homepage/HomePage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // Future<void>
 //   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'A Safe Place',
-      home: HomePage(),
+      home: Event(),
       // home: HomePage(),
     );
   }
