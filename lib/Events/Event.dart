@@ -45,13 +45,13 @@ class _EventState extends State<Event> {
     print("build");
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(
           child: Form(
             key: _formKey,
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
                   const Text(
                     "Create New",
@@ -102,12 +102,12 @@ class _EventState extends State<Event> {
                       keyboardType: TextInputType.phone,
                       maxLines: 1,
                       controller: contactNumberController),
-                  // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                  StandardInputField(
-                      name: 'upload',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: uploadController),
+                  // // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                  // StandardInputField(
+                  //     name: 'upload',
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     controller: uploadController),
 
                   ElevatedButton(
                     child: const Text('Attach File or Photo to Event'),
@@ -168,9 +168,8 @@ class _EventState extends State<Event> {
   }
 }
 
-// TODO stop form overflow
 // TODO reminders
 // TODO image uploads
 // TODO save to db
 // TODO need a vertical scroll
-// TODO make sure upload is included in form submission
+// TODO make sure upload is included in form submission - do we still need the upload controller?
