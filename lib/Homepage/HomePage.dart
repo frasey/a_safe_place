@@ -3,7 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'MenuTile.dart';
 import '../Events/Event.dart';
 import 'package:a_safe_place/Profile.dart';
-import 'package:a_safe_place/Tags/tag_dialog.dart';
+import 'package:a_safe_place/Events/AllEvents.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
               MenuTile(title: 'Profile', linkedPage: Profile() ),
               MenuTile(title: 'Your tags', linkedPage: HomePage() ),
               MenuTile(title: 'Your docs/images', linkedPage: HomePage() ),
-              MenuTile(title: 'All events', linkedPage: HomePage() ),
+              MenuTile(title: 'All events', linkedPage: AllEvents() ),
               MenuTile(title: 'Create new event', linkedPage: Event() ),
               MenuTile(title: 'Log out', linkedPage: Profile() )
             ],
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                 childCurrent: this,
                 duration: const Duration(milliseconds: 800),
                 reverseDuration: const Duration(milliseconds: 800),
-                child: const HomePage(),
+                child: const AllEvents(),
               )),
             ),
             // NOTES
