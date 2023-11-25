@@ -5,7 +5,7 @@ import 'package:a_safe_place/Events/Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Homepage/HomePage.dart';
-import 'Profile.dart';
+import 'User/Profile.dart';
 
 void main() async {
   // Future<void>

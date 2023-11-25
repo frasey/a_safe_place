@@ -2,7 +2,7 @@ import 'package:a_safe_place/Homepage/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'Tags/Tag.dart';
+import '../Tags/Tag.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
