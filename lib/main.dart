@@ -5,6 +5,7 @@ import 'package:a_safe_place/Events/Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'Homepage/HomePage.dart';
+import 'Profile.dart';
 
 void main() async {
   // Future<void>
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'A Safe Place',
-      home: HomePage(),
+      home: Profile(),
       // home: HomePage(),
     );
   }
