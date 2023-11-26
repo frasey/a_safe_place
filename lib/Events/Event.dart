@@ -213,7 +213,6 @@ class _EventState extends State<Event> {
 }
 
 // TODO stop form overflow
-// TODO alter description field to larger size
 // TODO reminders
 // TODO image uploads
 // TODO save to db
