@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'MenuTile.dart';
 import '../Events/Event.dart';
+import 'package:a_safe_place/User/Profile.dart';
+import 'package:a_safe_place/Events/AllEvents.dart';
+import 'package:a_safe_place/User/UserImages.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,8 +32,16 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: () {
-                //OPEN PROFILE PAGE HERE
+              onPressed: () =>
+              {
+                Navigator.of(context).push(PageTransition(
+                  type: PageTransitionType.rightToLeftJoined,
+                  childCurrent: this,
+                  duration: const Duration(milliseconds: 800),
+                  reverseDuration: const Duration(milliseconds: 800),
+                  child: const Profile(),
+                  ),
+                )
               },
             )
           ],
@@ -45,13 +56,13 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(color: Colors.blueGrey),
                 child: Text('Menu'),
               ),
-              MenuTile(title: 'Home'),
-              MenuTile(title: 'Profile'),
-              MenuTile(title: 'Your tags'),
-              MenuTile(title: 'Your docs/images'),
-              MenuTile(title: 'All events'),
-              MenuTile(title: 'Create new event'),
-              MenuTile(title: 'Log out')
+              MenuTile(title: 'Home', linkedPage: HomePage() ),
+              MenuTile(title: 'Profile', linkedPage: Profile() ),
+              MenuTile(title: 'Your tags', linkedPage: HomePage() ),
+              MenuTile(title: 'Your docs/images', linkedPage: UserImages() ),
+              MenuTile(title: 'All events', linkedPage: AllEvents() ),
+              MenuTile(title: 'Create new event', linkedPage: Event() ),
+              MenuTile(title: 'Log out', linkedPage: Profile() )
             ],
           ),
         ),
@@ -89,7 +100,7 @@ class HomePage extends StatelessWidget {
                 childCurrent: this,
                 duration: const Duration(milliseconds: 800),
                 reverseDuration: const Duration(milliseconds: 800),
-                child: const HomePage(),
+                child: const AllEvents(),
               )),
             ),
             // NOTES
