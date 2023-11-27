@@ -1,16 +1,36 @@
+import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
 import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
-import 'package:a_safe_place/Authentication/signup_page.dart';
-import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:a_safe_place/Authentication/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Sign Up"),
       ),
       body: Center(
         child: Padding(
@@ -19,13 +39,22 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Login",
+                "Sign Up",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
+                controller: _usernameController,
+                hintText: "Username",
+                isPasswordField: false,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormContainerWidget(
+                controller: _emailController,
                 hintText: "Email",
                 isPasswordField: false,
               ),
@@ -33,6 +62,7 @@ class LoginPage extends StatelessWidget {
                 height: 10,
               ),
               FormContainerWidget(
+                controller: _passwordController,
                 hintText: "Password",
                 isPasswordField: true,
               ),
@@ -40,10 +70,7 @@ class LoginPage extends StatelessWidget {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                },
+                onTap: _signUp,
                 child: Container(
                     width: double.infinity,
                     height: 45,
@@ -53,7 +80,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     child: Center(
                         child: Text(
-                      "Login",
+                      "Sign Up",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ))),
@@ -64,7 +91,7 @@ class LoginPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  Text("Already have an account?"),
                   SizedBox(
                     width: 5,
                   ),
@@ -72,10 +99,10 @@ class LoginPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                          MaterialPageRoute(builder: (context) => LoginPage()),
                           (route) => false);
                     },
-                    child: Text("Sign Up",
+                    child: Text("Login",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                   )
@@ -86,5 +113,20 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _signUp() async {
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully created");
+      Navigator.pushNamed(context, "/home");
+    } else {
+      print("An error occurred");
+    }
   }
 }
