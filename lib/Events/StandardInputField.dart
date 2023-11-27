@@ -5,9 +5,12 @@ class StandardInputField extends StatelessWidget {
   final TextInputType keyboardType;
   final int? maxLines;
   final TextEditingController controller;
+  final bool requireValidation;
+
 
   const StandardInputField(
-      {super.key, required this.name, required this.keyboardType, required this.maxLines, required this.controller});
+      {super.key, required this.name, required this.keyboardType, required this.maxLines,
+        required this.controller, this.requireValidation = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class StandardInputField extends StatelessWidget {
             fontSize: 20,
           ),
           filled: true,
-          fillColor: Colors.white, //MIGHT WANT TO CHANGE THIS IF HAVE THEME
+          fillColor: Colors.white,    //TODO MIGHT WANT TO CHANGE THIS IF HAVE THEME
           contentPadding: const EdgeInsets.all(5.0),
           focusedBorder: border,
           enabledBorder: border,
@@ -41,16 +44,16 @@ class StandardInputField extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        validator: (value) {
+        validator: requireValidation
+          ? (value) {
           // validator will return the value of all the information entered in the text field
           if (value == null || value.isEmpty) {
-            return 'Enter something';
+            return 'Please enter $name';
           }
           return null;
-        },
+        }
+        : null,
       ),
     );
   }
 }
-
-//TODO update validators so only used when relevant
