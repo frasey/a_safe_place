@@ -1,6 +1,8 @@
 import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
 import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
 import 'package:a_safe_place/Authentication/login_page.dart';
+import 'package:a_safe_place/Global/Common/toast.dart';
+import 'package:a_safe_place/Homepage/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  bool _isSigningUp = false;
 
   @override
   void dispose() {
@@ -70,7 +74,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 30,
               ),
               GestureDetector(
-                onTap: _signUp,
+                onTap: () {
+                  _signUp();
+                },
                 child: Container(
                     width: double.infinity,
                     height: 45,
@@ -79,11 +85,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                        child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ))),
+                        child: _isSigningUp
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ))),
               ),
               SizedBox(
                 height: 20,
@@ -116,17 +127,28 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _signUp() async {
+    setState(() {
+      _isSigningUp = true;
+    });
+
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
+    setState(() {
+      _isSigningUp = false;
+    });
+
     if (user != null) {
-      print("User is successfully created");
-      Navigator.pushNamed(context, "/home");
+      showToast(message: "User is successfully created");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      ); //might need to change this
     } else {
-      print("An error occurred");
+      showToast(message: "An error occurred");
     }
   }
 }

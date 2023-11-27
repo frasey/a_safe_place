@@ -1,10 +1,31 @@
+import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
 import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
 import 'package:a_safe_place/Authentication/signup_page.dart';
+import 'package:a_safe_place/Global/Common/toast.dart';
 import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isSigning = false;
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +47,7 @@ class LoginPage extends StatelessWidget {
                 height: 30,
               ),
               FormContainerWidget(
+                controller: _emailController,
                 hintText: "Email",
                 isPasswordField: false,
               ),
@@ -33,6 +55,7 @@ class LoginPage extends StatelessWidget {
                 height: 10,
               ),
               FormContainerWidget(
+                controller: _passwordController,
                 hintText: "Password",
                 isPasswordField: true,
               ),
@@ -40,10 +63,7 @@ class LoginPage extends StatelessWidget {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                },
+                onTap: _signIn,
                 child: Container(
                     width: double.infinity,
                     height: 45,
@@ -52,11 +72,16 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                        child: Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ))),
+                        child: _isSigning
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ))),
               ),
               SizedBox(
                 height: 20,
@@ -86,5 +111,30 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    setState(() {
+      _isSigning = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigning = false;
+    });
+
+    if (user != null) {
+      showToast(message: "User is successfully signed in");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      showToast(message: "An error occurred");
+    }
   }
 }
