@@ -9,6 +9,7 @@ import 'package:a_safe_place/Tags/Tag.dart';
 import 'package:a_safe_place/Tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -26,6 +27,8 @@ class _EventState extends State<Event> {
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   PlatformFile? pickedFile;
 
   Future uploadFile() async {
@@ -171,6 +174,7 @@ class _EventState extends State<Event> {
                           // setState(() {
                           // Form.handler.saveAll(<all fields here>)}
                           // collection.insertMany()
+                          saveJsonToFirestore();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Great!'),
@@ -194,6 +198,16 @@ class _EventState extends State<Event> {
     final appStorage = await getApplicationDocumentsDirectory();
     final newFile = File('${appStorage.path}/${file.name}');
     return File(file.path!).copy(newFile.path);
+  }
+  // can save a thing with this func?
+  Future<void> saveJsonToFirestore() async {
+    Map<String, dynamic> dummyData = {
+      'name': 'John Doe',
+      'age': 25,
+      'city': 'Example City',
+      // Add more fields as needed
+    };
+    await _firestore.collection('a-safe-test').add(dummyData);
   }
 
   void openFile(PlatformFile file) {

@@ -3,11 +3,14 @@ import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:a_safe_place/Events/Event.dart';
 import 'package:flutter/material.dart';
 import 'Homepage/HomePage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
-  // Future<void>
-//   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
