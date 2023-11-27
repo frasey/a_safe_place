@@ -98,10 +98,27 @@ class _EventState extends State<Event> {
                       controller: titleController,
                       requireValidation: true),
                   // DATE & TIME
-                   SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: DateTimePicker(),
+                  InkWell(
+                    onTap: () {
+                      // Show the DateTimePicker as a dialog
+                      showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: DateTimePicker(),
+                          );
+                        },
+                      );
+                    },
+                    child: const SizedBox(
+                      width: 400,
+                      height: 50,
+                      child: Center(
+                        child: Text(
+                          'Select Date and Time',
+                        ),
+                      ),
+                    ),
                   ),
 
                   // LOCATION
