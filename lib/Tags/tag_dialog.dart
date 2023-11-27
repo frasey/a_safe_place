@@ -20,15 +20,33 @@ Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) asyn
     ));
   }
 
-  ElevatedButton(
-    child: const Text('Create new tag'),
-    onPressed: () async {
-      Tag? newTag = await showCreateNewTagDialog(context);
-      if (newTag != null) {
-        // setState(() {
-          existingTags.add(newTag);
-        // });
-      }
-    }
+  Tag? newTag = await showDialog<Tag?>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Add a tag'),
+        content: Column(
+          children: [
+            DropdownButton<Tag?>(
+              hint: Text('Select existing tag'),
+              items: items,
+              onChanged: (Tag? selectedTag) {
+                Navigator.of(context).pop(selectedTag);
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Create new tag'),
+              onPressed: () async {
+                Tag? newTag = await showCreateNewTagDialog(context);
+                if (newTag != null) {
+                  existingTags.add(newTag);
+                  Navigator.of(context).pop(newTag);
+                }
+              },
+            ),
+          ],
+        ),
+      );
+    },
   );
 }
