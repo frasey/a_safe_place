@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:a_safe_place/Events/StandardInputField.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +27,9 @@ class _EventState extends State<Event> {
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // !!!TEMPORARY TAG STORAGE!!!
+  List<Tag> selectedTags = [];
 
   PlatformFile? pickedFile;
 
@@ -188,13 +190,15 @@ class _EventState extends State<Event> {
 
                   // ADD TAGS BUTTON
                   ElevatedButton(
-                    child: const Text('Add Tag'),
-                    onPressed: () async {
-                      Tag? newTag = await showAddTagDialog(context);
-                      if (newTag != null) {
-                        print("New Tag: ${newTag.name}");
-                      }
-                    },
+                        child: const Text('Add tag'),
+                        onPressed: () async {
+                        Tag? newTag = await showAddTagDialog(context, selectedTags);
+                        if (newTag != null) {
+                          setState(() {
+                            selectedTags.add(newTag);
+                          });
+                        }
+                      },
                   ),
 
                   // SAVE FORM
