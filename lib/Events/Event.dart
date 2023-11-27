@@ -9,6 +9,7 @@ import 'package:a_safe_place/Tags/Tag.dart';
 import 'package:a_safe_place/Tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -18,7 +19,6 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
-
   final TextEditingController titleController = TextEditingController();
   final TextEditingController dateAndTimeController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -27,6 +27,26 @@ class _EventState extends State<Event> {
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  PlatformFile? pickedFile;
+
+  Future uploadFile() async {
+    final path = 'files/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    // final ref = FirebaseStorage.instance.ref().child(path);
+    // ref.putFile(file);
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
 
   @override
   void initState() {
@@ -51,74 +71,135 @@ class _EventState extends State<Event> {
         child: SafeArea(
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                const Text(
-                  "Create New",
-                  style: TextStyle(
-                    fontSize: 20,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  if (pickedFile != null)
+                    Expanded(
+                      child: Container(
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 32),
+                  const Text(
+                    "Create New",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                const SingleChildScrollView(scrollDirection: Axis.vertical),
-                // EVENT TITLE
-                StandardInputField(name: 'Title', keyboardType: TextInputType.text, maxLines: 1, controller: titleController),
-                // DATE * TIME
-                StandardInputField(name: 'DD/MM/YYYY 00:00', keyboardType: TextInputType.datetime, maxLines: 1, controller: dateAndTimeController),
-                // LOCATION
-                StandardInputField(name: 'Location', keyboardType: TextInputType.multiline, maxLines: 2, controller: locationController),
-                // DESCRIPTION
-                StandardInputField(name: 'Description', keyboardType: TextInputType.multiline, maxLines: 5, controller: descriptionController),
-                // REMINDER - PLACEHOLDER
-                StandardInputField(name: 'Reminder', keyboardType: TextInputType.text, maxLines: 1, controller: reminderController),
-                // CONTACT NAME
-                StandardInputField(name: 'Contact name', keyboardType: TextInputType.text, maxLines: 1, controller: contactNameController),
-                // CONTACT NUMBER
-                StandardInputField(name: 'Contact number', keyboardType: TextInputType.phone, maxLines: 1, controller: contactNumberController),
-                // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                StandardInputField(name: 'upload', keyboardType: TextInputType.text, maxLines: 1, controller: uploadController),
-                
-                ElevatedButton(
-                  child: const Text('Attach File or Photo to Event'),
-                  onPressed: () async {
-                    final result = await FilePicker.platform.pickFiles();
-                    if (result == null) return;
+                  StandardInputField(
+                      name: 'Title (required)',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: titleController,
+                      requireValidation: true),
+                  // DATE * TIME
+                  StandardInputField(
+                      name: 'DD/MM/YYYY 00:00 (required)',
+                      keyboardType: TextInputType.datetime,
+                      maxLines: 1,
+                      controller: dateAndTimeController,
+                      requireValidation: true),
+                  // LOCATION
+                  StandardInputField(
+                      name: 'Location',
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 2,
+                      controller: locationController),
+                  // DESCRIPTION
+                  StandardInputField(
+                      name: 'Description',
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 4,
+                      controller: descriptionController),
+                  // REMINDER - PLACEHOLDER
+                  StandardInputField(
+                      name: 'Reminder',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: reminderController),
+                  // CONTACT NAME
+                  StandardInputField(
+                      name: 'Contact name',
+                      keyboardType: TextInputType.text,
+                      maxLines: 1,
+                      controller: contactNameController),
+                  // CONTACT NUMBER
+                  StandardInputField(
+                      name: 'Contact number',
+                      keyboardType: TextInputType.phone,
+                      maxLines: 1,
+                      controller: contactNumberController),
+                  
+                  // UPLOAD BUTTONS
+                  const Text('Want to add a file?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+    ),
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child:
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                        onPressed: selectFile,
+                        child: const Text('Select'),
 
-                    final file = result.files.first;
-                    final newFile = await saveFilePermanently(file);
-                  },
+                    // {
+                    //     final result = await FilePicker.platform.pickFiles();
+                    //     if (result == null) return;
+                    //
+                    //     final file = result.files.first;
+                    //     final newFile = await saveFilePermanently(file);
+                    //   },
+                        ),
+                        ElevatedButton(
+                          onPressed: uploadFile,
+                          child: const Text('Upload'),
+                        ),
+                  ]
                 ),
+              ),
 
-                ElevatedButton(
-                  onPressed: () async {
-                    Tag? newTag = await showAddTagDialog(context);
-                    if (newTag != null) {
-                      print("New Tag: ${newTag.name}");
-                    }
-                  },
-                  child: const Text('Add Tag'),
-                ),
+                  // ADD TAGS BUTTON
+                  ElevatedButton(
+                        child: const Text('Add Tag'),
+                        onPressed: () async {
+                        Tag? newTag = await showAddTagDialog(context);
+                        if (newTag != null) {
+                          print("New Tag: ${newTag.name}");
+                        }
+                      },
+                  ),
 
-                // ELEVATED BUTTON
-                ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                        // setState(() {
-                        // Form.handler.saveAll(<all fields here>)}
-                        // collection.insertMany()
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Great!'),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Save')),
-              ],
+                  // SAVE FORM
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                          saveJsonToFirestore();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Great!'),
+                            ),
+                          );
+                          _formKey.currentState!.reset();
+                        }
+                      },
+                      child: const Text('Save'),
+                  ),
+                  ],
             ),
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -128,14 +209,25 @@ class _EventState extends State<Event> {
     final newFile = File('${appStorage.path}/${file.name}');
     return File(file.path!).copy(newFile.path);
   }
+  // can save a thing with this func?
+  Future<void> saveJsonToFirestore() async {
+    Map<String, dynamic> dummyData = {
+      'name': 'John Doe',
+      'age': 25,
+      'city': 'Example City',
+      // Add more fields as needed
+    };
+    await _firestore.collection('a-safe-test').add(dummyData);
+  }
 
   void openFile(PlatformFile file) {
     OpenFile.open(file.path);
   }
 }
 
-// TODO stop form overflow
-// TODO alter description field to larger size
+
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO make upload/submit image form buttons smaller? or move tags somewhere else?
+// TODO make sure images are saving to the event and not just db

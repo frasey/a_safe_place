@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "460456572303",
+    "firebase_url": "https://a-safe-place-fb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "a-safe-place-fb",
+    "storage_bucket": "a-safe-place-fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460456572303:android:462a1bfec01e128aedc7fa",
+        "android_client_info": {
+          "package_name": "com.example.a_safe_place"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460456572303-e6j2ee5m5t0ig3i7ldloo1jqkks7d6tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVa6pksvQvzDEbLppMjL4yFYdI1iItOB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460456572303-e6j2ee5m5t0ig3i7ldloo1jqkks7d6tu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "460456572303-1b0lf8trfr6shc5q5suo0ju1meb7t120.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aSafePlace.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
