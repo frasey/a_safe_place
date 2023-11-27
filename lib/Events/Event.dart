@@ -150,10 +150,6 @@ class _EventState extends State<Event> {
                         ElevatedButton(
                         onPressed: selectFile,
                         child: const Text('Select'),
-                          
-                  ElevatedButton(
-                    onPressed: selectFile,
-                    child: const Text('Select a File or Photo for Event'),
 
                     // {
                     //     final result = await FilePicker.platform.pickFiles();
@@ -187,9 +183,6 @@ class _EventState extends State<Event> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                          // setState(() {
-                          // Form.handler.saveAll(<all fields here>)}
-                          // collection.insertMany()
                           saveJsonToFirestore();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
