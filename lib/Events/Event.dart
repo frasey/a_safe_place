@@ -9,6 +9,7 @@ import 'package:a_safe_place/Tags/Tag.dart';
 import 'package:a_safe_place/Tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -26,6 +27,8 @@ class _EventState extends State<Event> {
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   PlatformFile? pickedFile;
 
   Future uploadFile() async {
@@ -89,16 +92,18 @@ class _EventState extends State<Event> {
                     ),
                   ),
                   StandardInputField(
-                      name: 'Title',
+                      name: 'Title (required)',
                       keyboardType: TextInputType.text,
                       maxLines: 1,
-                      controller: titleController),
+                      controller: titleController,
+                      requireValidation: true),
                   // DATE * TIME
                   StandardInputField(
-                      name: 'DD/MM/YYYY 00:00',
+                      name: 'DD/MM/YYYY 00:00 (required)',
                       keyboardType: TextInputType.datetime,
                       maxLines: 1,
-                      controller: dateAndTimeController),
+                      controller: dateAndTimeController,
+                      requireValidation: true),
                   // LOCATION
                   StandardInputField(
                       name: 'Location',
@@ -129,12 +134,12 @@ class _EventState extends State<Event> {
                       keyboardType: TextInputType.phone,
                       maxLines: 1,
                       controller: contactNumberController),
-                  // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                  StandardInputField(
-                      name: 'upload',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: uploadController),
+                  // // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                  // StandardInputField(
+                  //     name: 'upload',
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     controller: uploadController),
 
                   ElevatedButton(
                     onPressed: selectFile,
@@ -169,11 +174,13 @@ class _EventState extends State<Event> {
                           // setState(() {
                           // Form.handler.saveAll(<all fields here>)}
                           // collection.insertMany()
+                          saveJsonToFirestore();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Great!'),
                             ),
                           );
+                          _formKey.currentState!.reset();
                         }
                       },
                       child: const Text('Save')),
@@ -192,14 +199,24 @@ class _EventState extends State<Event> {
     final newFile = File('${appStorage.path}/${file.name}');
     return File(file.path!).copy(newFile.path);
   }
+  // can save a thing with this func?
+  Future<void> saveJsonToFirestore() async {
+    Map<String, dynamic> dummyData = {
+      'name': 'John Doe',
+      'age': 25,
+      'city': 'Example City',
+      // Add more fields as needed
+    };
+    await _firestore.collection('a-safe-test').add(dummyData);
+  }
 
   void openFile(PlatformFile file) {
     OpenFile.open(file.path);
   }
 }
 
-// TODO stop form overflow
-// TODO alter description field to larger size
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO need a vertical scroll
+// TODO make sure upload is included in form submission - do we still need the upload controller?
