@@ -15,23 +15,27 @@ class FBDataService{
   }
 
   // ADD OR EDIT EVENT
-  Map<String, Object> event = new HashMap<>();
-  FBDataService.put("event", );
-  FBDataService.put("state", "CA");
-  FBDataService.put("country", "USA");
+    Map<String, Object> event = new HashMap<>();
+    FBDataService.put("event", /*controller info here?*/);
 
-  db.collection("cities").document("LA")
-      .set(city)
-      .addOnSuccessListener(new OnSuccessListener<Void>() {
-  @Override
-  public void onSuccess(Void aVoid) {
-  Log.d(TAG, "DocumentSnapshot successfully written!");
-  }
-  })
-      .addOnFailureListener(new OnFailureListener() {
-  @Override
-  public void onFailure(@NonNull Exception e) {
-  Log.w(TAG, "Error writing document", e);
-  }
-  });
+    // why can't this see the db?
+    db.collection("users").document("event")
+        .set(event)
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+          @Override
+          public void onSuccess(Void aVoid) {
+          Log.d(TAG, "Event saved!");
+          }
+        },
+      )
+        .addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+          Log.w(TAG, "Error writing document", e);
+          }
+        },
+        )
+
+    // DELETE EVENT
+
 }
