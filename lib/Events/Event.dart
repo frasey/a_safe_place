@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:a_safe_place/Events/StandardInputField.dart';
-import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import 'package:a_safe_place/Tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'DateTimePicker.dart';
 
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
@@ -97,13 +97,10 @@ class _EventState extends State<Event> {
                       maxLines: 1,
                       controller: titleController,
                       requireValidation: true),
-                  // DATE * TIME
-                  StandardInputField(
-                      name: 'DD/MM/YYYY 00:00 (required)',
-                      keyboardType: TextInputType.datetime,
-                      maxLines: 1,
-                      controller: dateAndTimeController,
-                      requireValidation: true),
+                  // DATE & TIME
+
+                  DateTimePicker(),
+
                   // LOCATION
                   StandardInputField(
                       name: 'Location',
