@@ -41,10 +41,12 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Choose time and date'),
+        title: const Text('Date & Time'),
       ),
       body: Center(
-        child: Column(
+        child: Container(
+          padding: const EdgeInsets.all(5.0),
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -67,6 +69,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                 ))
           ],
         ),
+      ),
       ),
     );
   }

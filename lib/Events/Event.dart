@@ -105,13 +105,16 @@ class _EventState extends State<Event> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          content: DateTimePicker(),
+                          content: SizedBox(
+                            height: 300,
+                            child:DateTimePicker(),
+                            ),
                           );
                         },
                       );
                     },
                     child: const SizedBox(
-                      width: 400,
+                      width: 300,
                       height: 50,
                       child: Center(
                         child: Text(
