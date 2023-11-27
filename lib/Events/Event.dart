@@ -89,16 +89,18 @@ class _EventState extends State<Event> {
                     ),
                   ),
                   StandardInputField(
-                      name: 'Title',
+                      name: 'Title (required)',
                       keyboardType: TextInputType.text,
                       maxLines: 1,
-                      controller: titleController),
+                      controller: titleController,
+                      requireValidation: true),
                   // DATE * TIME
                   StandardInputField(
-                      name: 'DD/MM/YYYY 00:00',
+                      name: 'DD/MM/YYYY 00:00 (required)',
                       keyboardType: TextInputType.datetime,
                       maxLines: 1,
-                      controller: dateAndTimeController),
+                      controller: dateAndTimeController,
+                      requireValidation: true),
                   // LOCATION
                   StandardInputField(
                       name: 'Location',
@@ -129,12 +131,12 @@ class _EventState extends State<Event> {
                       keyboardType: TextInputType.phone,
                       maxLines: 1,
                       controller: contactNumberController),
-                  // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                  StandardInputField(
-                      name: 'upload',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: uploadController),
+                  // // UPLOAD DOCS/IMAGES - PLACEHOLDER
+                  // StandardInputField(
+                  //     name: 'upload',
+                  //     keyboardType: TextInputType.text,
+                  //     maxLines: 1,
+                  //     controller: uploadController),
 
                   ElevatedButton(
                     onPressed: selectFile,
@@ -174,6 +176,7 @@ class _EventState extends State<Event> {
                               content: Text('Great!'),
                             ),
                           );
+                          _formKey.currentState!.reset();
                         }
                       },
                       child: const Text('Save')),
@@ -198,8 +201,8 @@ class _EventState extends State<Event> {
   }
 }
 
-// TODO stop form overflow
-// TODO alter description field to larger size
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO need a vertical scroll
+// TODO make sure upload is included in form submission - do we still need the upload controller?
