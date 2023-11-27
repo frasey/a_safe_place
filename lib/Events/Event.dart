@@ -92,16 +92,18 @@ class _EventState extends State<Event> {
                     ),
                   ),
                   StandardInputField(
-                      name: 'Title',
+                      name: 'Title (required)',
                       keyboardType: TextInputType.text,
                       maxLines: 1,
-                      controller: titleController),
+                      controller: titleController,
+                      requireValidation: true),
                   // DATE * TIME
                   StandardInputField(
-                      name: 'DD/MM/YYYY 00:00',
+                      name: 'DD/MM/YYYY 00:00 (required)',
                       keyboardType: TextInputType.datetime,
                       maxLines: 1,
-                      controller: dateAndTimeController),
+                      controller: dateAndTimeController,
+                      requireValidation: true),
                   // LOCATION
                   StandardInputField(
                       name: 'Location',
@@ -112,7 +114,7 @@ class _EventState extends State<Event> {
                   StandardInputField(
                       name: 'Description',
                       keyboardType: TextInputType.multiline,
-                      maxLines: 5,
+                      maxLines: 4,
                       controller: descriptionController),
                   // REMINDER - PLACEHOLDER
                   StandardInputField(
@@ -132,16 +134,23 @@ class _EventState extends State<Event> {
                       keyboardType: TextInputType.phone,
                       maxLines: 1,
                       controller: contactNumberController),
-                  // UPLOAD DOCS/IMAGES - PLACEHOLDER
-                  StandardInputField(
-                      name: 'upload',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: uploadController),
+                  
+                  // UPLOAD BUTTONS
+                  const Text('Want to add a file?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+    ),
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child:
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                        onPressed: selectFile,
+                        child: const Text('Select'),
 
-                  ElevatedButton(
-                    onPressed: selectFile,
-                    child: const Text('Select a File or Photo for Event'),
                     // {
                     //     final result = await FilePicker.platform.pickFiles();
                     //     if (result == null) return;
@@ -149,44 +158,48 @@ class _EventState extends State<Event> {
                     //     final file = result.files.first;
                     //     final newFile = await saveFilePermanently(file);
                     //   },
-                  ),
+                        ),
+                        ElevatedButton(
+                          onPressed: uploadFile,
+                          child: const Text('Upload'),
+                        ),
+                  ]
+                ),
+              ),
+
+                  // ADD TAGS BUTTON
                   ElevatedButton(
-                    onPressed: uploadFile,
-                    child: const Text('Upload File or Photo to Event'),
-
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     Tag? newTag = await showAddTagDialog(context);
-                    //     if (newTag != null) {
-                    //       print("New Tag: ${newTag.name}");
-                    //     }
-                    //   },
-                    //   child: const Text('Add Tag'),
+                        child: const Text('Add Tag'),
+                        onPressed: () async {
+                        Tag? newTag = await showAddTagDialog(context);
+                        if (newTag != null) {
+                          print("New Tag: ${newTag.name}");
+                        }
+                      },
                   ),
 
-                  // ELEVATED BUTTON
+                  // SAVE FORM
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                          // setState(() {
-                          // Form.handler.saveAll(<all fields here>)}
-                          // collection.insertMany()
                           saveJsonToFirestore();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Great!'),
                             ),
                           );
+                          _formKey.currentState!.reset();
                         }
                       },
-                      child: const Text('Save')),
-                ],
-              ),
+                      child: const Text('Save'),
+                  ),
+                  ],
             ),
           ),
         ),
       ),
+    ),
     );
   }
 
@@ -212,7 +225,9 @@ class _EventState extends State<Event> {
   }
 }
 
-// TODO stop form overflow
+
 // TODO reminders
 // TODO image uploads
 // TODO save to db
+// TODO make upload/submit image form buttons smaller? or move tags somewhere else?
+// TODO make sure images are saving to the event and not just db
