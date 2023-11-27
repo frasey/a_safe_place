@@ -54,7 +54,22 @@ class HomePage extends StatelessWidget {
             children: const <Widget>[
               DrawerHeader(
                 decoration: BoxDecoration(color: Colors.blueGrey),
-                child: Text('Menu'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Menu',
+                      style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      ),
+                    ),
+                    Text('USERNAME',   //TODO update to ${username}
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               MenuTile(title: 'Home', linkedPage: HomePage() ),
               MenuTile(title: 'Profile', linkedPage: Profile() ),
