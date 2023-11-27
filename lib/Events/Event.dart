@@ -225,6 +225,7 @@ class _EventState extends State<Event> {
   }
 }
 
+
 // TODO reminders
 // TODO image uploads
 // TODO save to db
