@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:a_safe_place/Events/StandardInputField.dart';
-import 'package:a_safe_place/Database/mongodb.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -134,72 +133,71 @@ class _EventState extends State<Event> {
                       keyboardType: TextInputType.phone,
                       maxLines: 1,
                       controller: contactNumberController),
-                  
+
                   // UPLOAD BUTTONS
-                  const Text('Want to add a file?',
+                  const Text(
+                    'Want to add a file?',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
-    ),
+                  ),
                   Container(
                     padding: const EdgeInsets.all(10.0),
-                    child:
-                      Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                        onPressed: selectFile,
-                        child: const Text('Select'),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: selectFile,
+                            child: const Text('Select'),
 
-                    // {
-                    //     final result = await FilePicker.platform.pickFiles();
-                    //     if (result == null) return;
-                    //
-                    //     final file = result.files.first;
-                    //     final newFile = await saveFilePermanently(file);
-                    //   },
-                        ),
-                        ElevatedButton(
-                          onPressed: uploadFile,
-                          child: const Text('Upload'),
-                        ),
-                  ]
-                ),
-              ),
+                            // {
+                            //     final result = await FilePicker.platform.pickFiles();
+                            //     if (result == null) return;
+                            //
+                            //     final file = result.files.first;
+                            //     final newFile = await saveFilePermanently(file);
+                            //   },
+                          ),
+                          ElevatedButton(
+                            onPressed: uploadFile,
+                            child: const Text('Upload'),
+                          ),
+                        ]),
+                  ),
 
                   // ADD TAGS BUTTON
                   ElevatedButton(
-                        child: const Text('Add Tag'),
-                        onPressed: () async {
-                        Tag? newTag = await showAddTagDialog(context);
-                        if (newTag != null) {
-                          print("New Tag: ${newTag.name}");
-                        }
-                      },
+                    child: const Text('Add Tag'),
+                    onPressed: () async {
+                      Tag? newTag = await showAddTagDialog(context);
+                      if (newTag != null) {
+                        print("New Tag: ${newTag.name}");
+                      }
+                    },
                   ),
 
                   // SAVE FORM
                   ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                          saveJsonToFirestore();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Great!'),
-                            ),
-                          );
-                          _formKey.currentState!.reset();
-                        }
-                      },
-                      child: const Text('Save'),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
+                        saveJsonToFirestore();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Great!'),
+                          ),
+                        );
+                        _formKey.currentState!.reset();
+                      }
+                    },
+                    child: const Text('Save'),
                   ),
-                  ],
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ),
     );
   }
 
@@ -209,6 +207,7 @@ class _EventState extends State<Event> {
     final newFile = File('${appStorage.path}/${file.name}');
     return File(file.path!).copy(newFile.path);
   }
+
   // can save a thing with this func?
   Future<void> saveJsonToFirestore() async {
     Map<String, dynamic> dummyData = {
@@ -224,7 +223,6 @@ class _EventState extends State<Event> {
     OpenFile.open(file.path);
   }
 }
-
 
 // TODO reminders
 // TODO image uploads
