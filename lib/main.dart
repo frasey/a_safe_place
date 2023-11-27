@@ -1,4 +1,7 @@
 import 'dart:ui';
+
+import 'package:a_safe_place/Authentication/login_page.dart';
+import 'package:a_safe_place/Features/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'Homepage/HomePage.dart';
 import 'User/Profile.dart';
@@ -27,7 +30,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'A Safe Place',
-      home: HomePage(),
+      home: SplashScreen(
+        child: HomePage(),
+      ),
     );
   }
 }
