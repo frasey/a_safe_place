@@ -98,8 +98,11 @@ class _EventState extends State<Event> {
                       controller: titleController,
                       requireValidation: true),
                   // DATE & TIME
-
-                  DateTimePicker(),
+                   SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: DateTimePicker(),
+                  ),
 
                   // LOCATION
                   StandardInputField(
