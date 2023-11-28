@@ -1,4 +1,4 @@
-import 'package:a_safe_place/Models/EventItem.dart';
+import 'package:a_safe_place/Models/event_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // FBDataService dbs = new FBDataService();
