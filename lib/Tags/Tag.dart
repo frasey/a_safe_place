@@ -4,8 +4,8 @@ class Tag{
   String name;
   Color color;
   bool isPrimary;
-  IconData icon;
+  IconData? icon;
 
-  Tag({required this.name, required this.color, this.isPrimary = false, this.icon = Icons.circle});
+  Tag({required this.name, required this.color, this.isPrimary = false, this.icon});
 }
 

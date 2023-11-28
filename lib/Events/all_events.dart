@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../Models/event_item.dart';
 import '../database/firebase_data_service.dart';
+import '../models/event_item.dart';
 
 class AllEvents extends StatefulWidget {
   const AllEvents({super.key});
@@ -24,16 +24,6 @@ class _AllEventsState extends State<AllEvents> {
       });
     });
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   WidgetsBinding.instance?.addPostFrameCallback((_) async {
-  //     setState(() {
-  //       // Write your code here
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {

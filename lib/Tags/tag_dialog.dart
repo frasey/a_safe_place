@@ -11,7 +11,19 @@ Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) asyn
       items.add(
         DropdownMenuItem(
           value: tag,
-          child: Text(tag.name),
+          child: Container(
+            width: 200,
+            child: ListTile(
+          title: Text(tag.name),
+          tileColor: tag.isPrimary ? tag.color : null,
+          leading: tag.isPrimary
+              ? null
+              : Icon(
+                  tag.icon,
+                  color: tag.color,
+                ),
+            ),
+          ),
         ),
       );
     }

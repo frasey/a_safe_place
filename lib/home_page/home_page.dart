@@ -1,7 +1,8 @@
+import 'package:a_safe_place/events/new_event_form.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'menu_tile.dart';
-import '../events/event.dart';
+import '../events/new_event_form.dart';
 import 'package:a_safe_place/user/profile.dart';
 import 'package:a_safe_place/events/all_events.dart';
 import 'package:a_safe_place/user/user_images.dart';
@@ -78,7 +79,7 @@ class HomePage extends StatelessWidget {
               MenuTile(title: 'Your tags', linkedPage: HomePage()),
               MenuTile(title: 'Your docs/images', linkedPage: UserImages()),
               MenuTile(title: 'All events', linkedPage: AllEvents()),
-              MenuTile(title: 'Create new event', linkedPage: Event()),
+              MenuTile(title: 'Create new event', linkedPage: NewEventForm()),
               MenuTile(title: 'Log out', linkedPage: Profile())
             ],
           ),
@@ -107,7 +108,7 @@ class HomePage extends StatelessWidget {
                 childCurrent: this,
                 duration: const Duration(milliseconds: 800),
                 reverseDuration: const Duration(milliseconds: 800),
-                child: const Event(),
+                child: NewEventForm(),
                   ),
                 ),
             ),
