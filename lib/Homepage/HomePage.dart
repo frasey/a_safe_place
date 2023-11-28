@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
             //                 type: PageTransitionType.scale,
             //                 alignment: Alignment.topCenter,
             //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
-
+            const SizedBox(height: 40),
             ElevatedButton(
               child: const Text('Create new event'),
               onPressed: () => Navigator.of(context).push(PageTransition(
@@ -108,6 +108,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
             ),
+            const SizedBox(height: 40),
             // SEE ALL EVENTS
             ElevatedButton(
               child: const Text('Show all events'),
