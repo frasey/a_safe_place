@@ -1,7 +1,8 @@
-import 'package:a_safe_place/Design/designservice.dart';
+import 'package:a_safe_place/design/design_service.dart';
 import 'package:flutter/material.dart';
-import 'package:a_safe_place/tags/tag.dart';
+import 'package:a_safe_place/models/tag.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
 
 class CreateNewTagDialog extends StatefulWidget {
   const CreateNewTagDialog({super.key});

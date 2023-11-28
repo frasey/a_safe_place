@@ -6,6 +6,7 @@ import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 

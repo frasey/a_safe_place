@@ -3,13 +3,14 @@ import 'package:a_safe_place/events/standard_input_field.dart';
 import 'package:a_safe_place/models/event_item.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:a_safe_place/tags/tag.dart';
+import 'package:a_safe_place/models/tag.dart';
 import 'package:a_safe_place/tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../database/firebase_data_service.dart';
 import 'date_time_picker.dart';
+
 
 class NewEventForm extends StatefulWidget {
   const NewEventForm({Key? key}) : super(key: key);
