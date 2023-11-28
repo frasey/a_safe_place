@@ -6,6 +6,7 @@ import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -43,12 +44,12 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "A Safe Place",
-                style: TextStyle(
+                style: GoogleFonts.nunitoSans(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: const Color.fromARGB(255, 26, 58, 58),
+                  fontSize: 35,
+                  color: Color.fromARGB(255, 75, 184, 137),
                 ),
               ),
               const SizedBox(height: 20),

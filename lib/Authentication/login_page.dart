@@ -55,8 +55,8 @@ class _LoginPageState extends State<LoginPage> {
                 "A Safe Place",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  color: const Color.fromARGB(255, 26, 58, 58),
+                  fontSize: 35,
+                  color: Color.fromARGB(255, 75, 184, 137),
                 ),
               ),
               const SizedBox(height: 20),

@@ -73,16 +73,19 @@ class _AllEventsState extends State<AllEvents> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
-            //add gesturedetector
             padding: const EdgeInsets.all(15.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(
-                  child: Text(
-                    event.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    overflow: TextOverflow.ellipsis,
+                GestureDetector(
+                  onTap: () {},
+                  child: Expanded(
+                    child: Text(
+                      event.name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
