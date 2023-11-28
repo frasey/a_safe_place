@@ -5,6 +5,7 @@ import 'package:a_safe_place/Global/common/toast.dart';
 import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -34,8 +35,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up"),
-      ),
+          // title: const Text("Sign Up"),
+          ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -43,8 +44,27 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
+                "A Safe Place",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                  color: const Color.fromARGB(255, 26, 58, 58),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const FaIcon(
+                FontAwesomeIcons.userSecret,
+                size: 100,
+                color: Color.fromARGB(255, 75, 184, 137),
+              ),
+              const SizedBox(height: 50),
+              const Text(
                 "Sign Up",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 26, 58, 58),
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -81,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     height: 45,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Color.fromARGB(255, 119, 104, 133),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
