@@ -26,9 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Center(
       child: Text(
         "Welcome to A Safe Place",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
       ),
     ));
   }
