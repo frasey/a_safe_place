@@ -105,7 +105,8 @@ class HomePage extends StatelessWidget {
                 duration: const Duration(milliseconds: 800),
                 reverseDuration: const Duration(milliseconds: 800),
                 child: const Event(),
-              )),
+                  ),
+                ),
             ),
             // SEE ALL EVENTS
             ElevatedButton(
@@ -119,10 +120,11 @@ class HomePage extends StatelessWidget {
               )),
             ),
             // NOTES
-            const Placeholder(
-              fallbackHeight: 80,
-              fallbackWidth: 150,
-            ),
+            // TODO space for user notes here
+            // const Placeholder(
+            //   fallbackHeight: 80,
+            //   fallbackWidth: 150,
+            // ),
           ],
         ));
   }
