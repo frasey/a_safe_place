@@ -51,19 +51,28 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("A Safe Place",
+              const Text(
+                "A Safe Place",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
+                  color: const Color.fromARGB(255, 26, 58, 58),
                 ),
               ),
-              const SizedBox(height: 50),
-              const FaIcon(FontAwesomeIcons.userSecret,
+              const SizedBox(height: 20),
+              const FaIcon(
+                FontAwesomeIcons.userSecret,
                 size: 100,
-                color: Color.fromARGB(255, 75, 184, 137), ),
+                color: Color.fromARGB(255, 75, 184, 137),
+              ),
+              const SizedBox(height: 50),
               const Text(
                 "Login",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 26, 58, 58),
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -90,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 45,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 119, 104, 133),
+                      color: Color.fromARGB(255, 119, 104, 133),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
@@ -156,7 +165,8 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Text("Sign Up",
                         style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold)),
+                            color: Color.fromARGB(255, 75, 184, 137),
+                            fontWeight: FontWeight.bold)),
                   )
                 ],
               )
