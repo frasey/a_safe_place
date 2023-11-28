@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class FBDataService{
 
   // INITIALISE AN INSTANCE OF THE CLOUD STORE
-  FirebaseFirestore db = FirebaseFirestore.getInstance;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   // GET ALL EVENTS
   static Future<List<Event>> getEvents() async {

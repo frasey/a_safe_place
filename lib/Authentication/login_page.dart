@@ -1,8 +1,8 @@
-import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
-import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
-import 'package:a_safe_place/Authentication/signup_page.dart';
-import 'package:a_safe_place/Global/Common/toast.dart';
-import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:a_safe_place/authentication/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:a_safe_place/authentication/widgets/form_container_widget.dart';
+import 'package:a_safe_place/authentication/signup_page.dart';
+import 'package:a_safe_place/Global/common/toast.dart';
+import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,11 +40,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Login",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Email",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Password",
                 isPasswordField: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               GestureDetector(
@@ -74,17 +74,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Center(
                         child: _isSigning
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 "Login",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               GestureDetector(
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -116,14 +116,14 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ))),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
-                  SizedBox(
+                  const Text("Don't have an account?"),
+                  const SizedBox(
                     width: 5,
                   ),
                   GestureDetector(
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                           MaterialPageRoute(builder: (context) => SignUpPage()),
                           (route) => false);
                     },
-                    child: Text("Sign Up",
+                    child: const Text("Sign Up",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                   )
