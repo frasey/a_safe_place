@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../Database/FBDataService.dart';
 import '../Models/EventItem.dart';
+import '../database/firebase_data_service.dart';
 
 class AllEvents extends StatefulWidget {
   const AllEvents({super.key});

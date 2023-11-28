@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FBDataService {
   // INITIALISE AN INSTANCE OF THE CLOUD STORE
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   // GET ALL EVENTS
   static Future<List<EventItem>> getEvents() async {
