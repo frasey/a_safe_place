@@ -87,6 +87,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // NEXT EVENT PREVIEW
+            const SizedBox(height: 20),
             const Placeholder(
               fallbackHeight: 80,
               fallbackWidth: 150,
