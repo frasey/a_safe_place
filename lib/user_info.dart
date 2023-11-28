@@ -12,6 +12,6 @@ class UserInfo{
     required this.userName,
     required this.tags,
     this.events});
-  
+
 }
 
