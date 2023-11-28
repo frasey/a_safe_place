@@ -1,5 +1,8 @@
-import 'package:a_safe_place/Models/event_item.dart';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../models/event_item.dart';
 
 // FBDataService dbs = new FBDataService();
 // dbs.addEvent();
@@ -26,6 +29,23 @@ class FBDataService {
       }
     }
     return itemsFromDB;
+  }
+
+
+  static void addEvent(EventItem newEvent) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    QuerySnapshot querySnapshot = await db.collection('events').get();
+
+    Random random = new Random();
+    String newId = "${newEvent.name.replaceAll(' ', '-')} ${random.nextInt(10000000)}";
+
+    Map<String, dynamic> eventAsJson = newEvent.toJson();
+    db
+        .collection("events")
+        .doc(newId)
+        .set(eventAsJson)
+        .onError((e, _) => print("Error writing document: $e"));
+
   }
 }
 

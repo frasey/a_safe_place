@@ -14,4 +14,13 @@ class EventItem {
     DateTime dateTime = jsonFromDB["dateTime"];
     return new EventItem(name, dateTime);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (name != null) "name": name,
+      if (dateTime != null) "dateTime": dateTime,
+    };
+  }
+
+
 }
