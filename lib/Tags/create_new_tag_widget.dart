@@ -33,7 +33,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                     children: [
                       TextField(
                         controller: nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Tag name',
                           border: OutlineInputBorder(),
                         ),
@@ -43,8 +43,8 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                           right: 8.0,
                           top: 8.0,
                           child: Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -69,7 +69,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Pick a colour'),
+                        title: const Text('Pick a colour'),
                         content: SingleChildScrollView(
                           child: BlockPicker(
                             availableColors: isPrimary ? DesignService.getPrimaryColours() : DesignService.getSecondaryColours(),
