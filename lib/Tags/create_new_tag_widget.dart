@@ -1,3 +1,4 @@
+import 'package:a_safe_place/Design/designservice.dart';
 import 'package:flutter/material.dart';
 import 'package:a_safe_place/Tags/Tag.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -68,6 +69,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                         title: Text('Pick a colour'),
                         content: SingleChildScrollView(
                           child: BlockPicker(
+                            availableColors: isPrimary ? DesignService.getPrimaryColours() : DesignService.getSecondaryColours(),
                             pickerColor: selectedColor,
                             onColorChanged: (color) {
                               setState(() {
