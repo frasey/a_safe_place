@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Models/EventItem.dart';
+import '../Models/event_item.dart';
 import '../database/firebase_data_service.dart';
 
 class AllEvents extends StatefulWidget {

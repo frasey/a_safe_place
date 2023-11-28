@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import 'Tags/Tag.dart';
+import 'event_item.dart';
+import '../tags/tag.dart';
 
 class UserInfo{
   String userName;
@@ -11,7 +10,7 @@ class UserInfo{
   UserInfo({
     required this.userName,
     required this.tags,
-    this.events});
+    required this.events});
 
 }
 
