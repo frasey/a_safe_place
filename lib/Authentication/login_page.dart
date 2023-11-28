@@ -18,8 +18,10 @@ class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController =
+      TextEditingController(text: "dave@gmail.com");
+  TextEditingController _passwordController =
+      TextEditingController(text: "123456");
 
   @override
   void dispose() {
@@ -53,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 isPasswordField: false,
               ),
               const SizedBox(
+
                 height: 10,
               ),
               FormContainerWidget(
@@ -69,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 45,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Color.fromARGB(255, 119, 104, 133),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
