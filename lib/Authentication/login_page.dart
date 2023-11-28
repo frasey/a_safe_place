@@ -31,20 +31,39 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Transform.translate(
+      //     offset: Offset(0.0, 18.0),
+      //     child: const Text("A Safe Place",
+      //       style: TextStyle(
+      //         fontWeight: FontWeight.bold,
+      //         fontSize: 28,
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text("A Safe Place",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                ),
+              ),
+              const SizedBox(height: 50),
+              const FaIcon(FontAwesomeIcons.userSecret,
+                size: 100,
+                color: Color.fromARGB(255, 75, 184, 137), ),
+              const Text(
                 "Login",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
@@ -52,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Email",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -60,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Password",
                 isPasswordField: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               GestureDetector(
@@ -69,22 +88,22 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 45,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                        color: Color.fromARGB(255, 119, 104, 133),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                         child: _isSigning
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 "Login",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               GestureDetector(
@@ -93,10 +112,10 @@ class _LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                       height: 45,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: const Color.fromARGB(255, 26, 58, 58),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -116,14 +135,14 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ))),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
-                  SizedBox(
+                  const Text("Don't have an account?"),
+                  const SizedBox(
                     width: 5,
                   ),
                   GestureDetector(
@@ -133,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                           MaterialPageRoute(builder: (context) => SignUpPage()),
                           (route) => false);
                     },
-                    child: Text("Sign Up",
+                    child: const Text("Sign Up",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                   )
