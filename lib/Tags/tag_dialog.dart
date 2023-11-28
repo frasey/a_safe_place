@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:a_safe_place/Tags/create_new_tag_dialog.dart';
-import 'package:a_safe_place/Tags/Tag.dart';
+import 'package:a_safe_place/tags/create_new_tag_dialog.dart';
+import 'package:a_safe_place/tags/tag.dart';
 
 Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) async {
 
   List<DropdownMenuItem<Tag?>> items = [];
 
   if (existingTags.isNotEmpty) {
-    existingTags.forEach((tag) {
+    for (var tag in existingTags) {
       items.add(
         DropdownMenuItem(
           value: tag,
@@ -26,8 +26,8 @@ Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) asyn
           ),
         ),
       );
-    });
-    items.add(DropdownMenuItem<Tag?>(
+    }
+    items.add(const DropdownMenuItem<Tag?>(
       child: Divider(),
     ));
   }
@@ -36,11 +36,11 @@ Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) asyn
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Add a tag'),
+        title: const Text('Add a tag'),
         content: Column(
           children: [
             DropdownButton<Tag?>(
-              hint: Text('Select existing tag'),
+              hint: const Text('Select existing tag'),
               items: items,
               onChanged: (Tag? selectedTag) {
                 Navigator.of(context).pop(selectedTag);

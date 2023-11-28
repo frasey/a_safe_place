@@ -1,8 +1,8 @@
-import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
-import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
-import 'package:a_safe_place/Authentication/login_page.dart';
-import 'package:a_safe_place/Global/Common/toast.dart';
-import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:a_safe_place/authentication/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:a_safe_place/authentication/widgets/form_container_widget.dart';
+import 'package:a_safe_place/authentication/login_page.dart';
+import 'package:a_safe_place/Global/common/toast.dart';
+import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -42,11 +42,11 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Sign Up",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
@@ -54,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Username",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Email",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -70,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Password",
                 isPasswordField: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               GestureDetector(
@@ -86,24 +86,24 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: Center(
                         child: _isSigningUp
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 "Sign Up",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account?"),
-                  SizedBox(
+                  const Text("Already have an account?"),
+                  const SizedBox(
                     width: 5,
                   ),
                   GestureDetector(
@@ -113,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           MaterialPageRoute(builder: (context) => LoginPage()),
                           (route) => false);
                     },
-                    child: Text("Login",
+                    child: const Text("Login",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold)),
                   )

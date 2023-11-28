@@ -1,9 +1,11 @@
 import 'package:a_safe_place/Design/designservice.dart';
 import 'package:flutter/material.dart';
-import 'package:a_safe_place/Tags/Tag.dart';
+import 'package:a_safe_place/tags/tag.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class CreateNewTagDialog extends StatefulWidget {
+  const CreateNewTagDialog({super.key});
+
   @override
   _CreateNewTagDialogState createState() => _CreateNewTagDialogState();
 }
@@ -18,7 +20,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add a new tag'),
+      title: const Text('Add a new tag'),
       content: Column(
         children: [
           Row(
@@ -58,8 +60,8 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
           ),
           Row(
             children: [
-              Text('Tag Color:'),
-              SizedBox(width: 10),
+              const Text('Tag Color:'),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () async {
                   Color pickedColor = await showDialog(
@@ -84,7 +86,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                             onPressed: () {
                               Navigator.of(context).pop(selectedColor);
                             },
-                            child: Text('OK'),
+                            child: const Text('OK'),
                           ),
                         ],
                       );
@@ -99,7 +101,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
             ],
           ),
           CheckboxListTile(
-            title: Text('Primary tag'),
+            title: const Text('Primary tag'),
             value: isPrimary,
             onChanged: (value) {
               setState(() {
@@ -110,8 +112,8 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
           if (!isPrimary)
             Row(
               children: [
-                Text('Tag shape:'),
-                SizedBox(width: 10),
+                const Text('Tag shape:'),
+                const SizedBox(width: 10),
                 DropdownButton<IconData>(
                   value: selectedIcon,
                   onChanged: (value) {
@@ -130,7 +132,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
@@ -161,7 +163,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
               Navigator.of(context).pop(newTag);
             }
           },
-          child: Text('Add Tag'),
+          child: const Text('Add Tag'),
         ),
       ],
     );

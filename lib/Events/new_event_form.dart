@@ -1,23 +1,24 @@
 import 'dart:io';
-import 'package:a_safe_place/Events/StandardInputField.dart';
+import 'package:a_safe_place/events/standard_input_field.dart';
+import 'package:a_safe_place/models/event_item.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:a_safe_place/Tags/Tag.dart';
-import 'package:a_safe_place/Tags/tag_dialog.dart';
+import 'package:a_safe_place/tags/tag.dart';
+import 'package:a_safe_place/tags/tag_dialog.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'DateTimePicker.dart';
+import '../database/firebase_data_service.dart';
+import 'date_time_picker.dart';
 
-class Event extends StatefulWidget {
-  const Event({Key? key}) : super(key: key);
+class NewEventForm extends StatefulWidget {
+  const NewEventForm({Key? key}) : super(key: key);
 
   @override
-  State<Event> createState() => _EventState();
+  State<NewEventForm> createState() => _NewEventFormState();
 }
 
-class _EventState extends State<Event> {
+class _NewEventFormState extends State<NewEventForm> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController dateAndTimeController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -27,6 +28,9 @@ class _EventState extends State<Event> {
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController uploadController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  DateTime dateTime = DateTime.now();
+  TimeOfDay timeOfDay = TimeOfDay.now();
 
   // !!!TEMPORARY TAG STORAGE!!!
   List<Tag> selectedTags = [];
@@ -56,9 +60,21 @@ class _EventState extends State<Event> {
     print("initState");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       print("WidgetsBinding");
-      // await MongoDatabase.connect();
+      //TODO await db connect here?
       print("post db");
     });
+  }
+
+  // DateTime selectedDate = DateTime.now();
+  // TimeOfDay selectedTime = TimeOfDay.now();
+
+  void dateTimeChanged(DateTime newDate, TimeOfDay newTime){
+    print("callback!");
+    setState(() {
+      dateTime = newDate;
+      timeOfDay = newTime;
+    });
+    print("dateTimeChanged! $newDate $newTime");
   }
 
   final _formKey = GlobalKey<FormState>(); // handles the validator
@@ -106,10 +122,10 @@ class _EventState extends State<Event> {
                       showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return AlertDialog(
+                        return  AlertDialog(
                           content: SizedBox(
                             height: 300,
-                            child:DateTimePicker(),
+                            child:  DateTimePicker( callback: dateTimeChanged ),
                             ),
                           );
                         },
@@ -172,7 +188,7 @@ class _EventState extends State<Event> {
                           ElevatedButton(
                             onPressed: selectFile,
                             child: const Text('Select'),
-
+                            // TODO code to select image here?
                             // {
                             //     final result = await FilePicker.platform.pickFiles();
                             //     if (result == null) return;
@@ -206,7 +222,7 @@ class _EventState extends State<Event> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
-                        saveJsonToFirestore();
+                        saveToDB();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Great!'),
@@ -234,14 +250,10 @@ class _EventState extends State<Event> {
   }
 
   // can save a thing with this func?
-  Future<void> saveJsonToFirestore() async {
-    Map<String, dynamic> dummyData = {
-      'name': 'John Doe',
-      'age': 25,
-      'city': 'Example City',
-      // Add more fields as needed
-    };
-    await _firestore.collection('a-safe-test').add(dummyData);
+  Future<void> saveToDB() async {
+    DateTime combineDateTime = new DateTime( dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour, timeOfDay.minute);
+    EventItem newEvent = new EventItem(titleController.value.text, combineDateTime);
+    FBDataService.addEvent(newEvent);
   }
 
   void openFile(PlatformFile file) {
