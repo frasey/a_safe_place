@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:a_safe_place/Authentication/login_page.dart';
 import 'package:a_safe_place/Features/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'User/Profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +19,14 @@ void main() async {
       appleProvider: AppleProvider.appAttest);
   runApp(const MyApp());
 }
+
+// final dummySnapshot = [
+//   {
+// {"Event Name": "Star Gazing"},
+//   {"Event Name": "Back-flip Practice"},
+//   {"Event Name": "Cooking Classes"},
+//   {"Event Name": "Sleep"},
+// ];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
