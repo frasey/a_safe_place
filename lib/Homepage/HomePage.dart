@@ -87,6 +87,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // NEXT EVENT PREVIEW
+            const SizedBox(height: 20),
             const Placeholder(
               fallbackHeight: 80,
               fallbackWidth: 150,
@@ -96,7 +97,7 @@ class HomePage extends StatelessWidget {
             //                 type: PageTransitionType.scale,
             //                 alignment: Alignment.topCenter,
             //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
-
+            const SizedBox(height: 40),
             ElevatedButton(
               child: const Text('Create new event'),
               onPressed: () => Navigator.of(context).push(PageTransition(
@@ -105,8 +106,10 @@ class HomePage extends StatelessWidget {
                 duration: const Duration(milliseconds: 800),
                 reverseDuration: const Duration(milliseconds: 800),
                 child: const Event(),
-              )),
+                  ),
+                ),
             ),
+            const SizedBox(height: 40),
             // SEE ALL EVENTS
             ElevatedButton(
               child: const Text('Show all events'),
@@ -119,10 +122,11 @@ class HomePage extends StatelessWidget {
               )),
             ),
             // NOTES
-            const Placeholder(
-              fallbackHeight: 80,
-              fallbackWidth: 150,
-            ),
+            // TODO space for user notes here
+            // const Placeholder(
+            //   fallbackHeight: 80,
+            //   fallbackWidth: 150,
+            // ),
           ],
         ));
   }
