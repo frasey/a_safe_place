@@ -3,7 +3,10 @@ import 'package:intl/intl.dart';
 import 'dart:async';
 
 class DateTimePicker extends StatefulWidget{
-  const DateTimePicker({super.key});
+  DateTimePicker({super.key, callback}){
+    this.callback = callback;
+  }
+  Function callback = (d,t){print("what?");};
 
   @override
   _DateTimePickerState createState() => _DateTimePickerState();
@@ -24,6 +27,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
       setState(() {
         selectedDate = picked;
       });
+      widget.callback(picked, selectedTime);
     }
   }
 
@@ -36,6 +40,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
       setState(() {
         selectedTime = picked;
       });
+      widget.callback( selectedDate , picked);
     }
   }
 
