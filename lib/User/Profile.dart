@@ -4,7 +4,8 @@ import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import '../tags/tag.dart';
+import '../models/tag.dart';
+
 
 class Profile extends StatelessWidget {
   const Profile({super.key});

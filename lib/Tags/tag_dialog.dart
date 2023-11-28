@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:a_safe_place/tags/create_new_tag_dialog.dart';
-import 'package:a_safe_place/tags/tag.dart';
+import 'package:a_safe_place/models/tag.dart';
+
 
 Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) async {
 
