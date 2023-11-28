@@ -9,9 +9,10 @@ class CreateNewTagDialog extends StatefulWidget {
 
 class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
   TextEditingController nameController = TextEditingController();
-  Color selectedColor = Colors.blue;
+  Color selectedColor = Colors.transparent;
   bool isPrimary = false;
-  IconData selectedIcon = Icons.circle;
+  IconData? selectedIcon;
+  Color initialShapeColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,40 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
       title: Text('Add a new tag'),
       content: Column(
         children: [
-          TextField(
-            controller: nameController,
-            decoration: InputDecoration(labelText: 'Tag name'),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  color: isPrimary ? selectedColor : null,
+                  child: Stack(
+                    children: [
+                      TextField(
+                        controller: nameController,
+                        decoration: InputDecoration(
+                          labelText: 'Tag name',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      if (!isPrimary && selectedIcon != null)
+                        Positioned(
+                          right: 8.0,
+                          top: 8.0,
+                          child: Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              selectedIcon,
+                              color:  isPrimary ? Colors.transparent : selectedColor,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           Row(
             children: [
@@ -40,6 +72,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                             onColorChanged: (color) {
                               setState(() {
                                 selectedColor = color;
+                                initialShapeColor = color;
                               });
                             },
                           ),
@@ -57,6 +90,9 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                   );
                 },
                 child: Text('Choose colour'),
+                style: ElevatedButton.styleFrom(
+                  primary: selectedColor,
+                ),
               ),
             ],
           ),
@@ -81,16 +117,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                       selectedIcon = value ?? Icons.circle;
                     });
                   },
-                  items: [
-                    DropdownMenuItem(
-                      value: Icons.circle,
-                      child: Icon(Icons.circle),
-                    ),
-                    DropdownMenuItem(
-                      value: Icons.square_foot,
-                      child: Icon(Icons.square_foot),
-                    ),
-                  ],
+                  items: buildShapeDropdownItems(initialShapeColor),
                 ),
               ],
             ),
@@ -105,12 +132,60 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
         ),
         TextButton(
           onPressed: () {
-            Tag newTag = Tag(name: nameController.text, color: selectedColor, isPrimary: isPrimary,  icon: selectedIcon);
-            Navigator.of(context).pop(newTag);
+            if (!isPrimary && selectedIcon == null) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Please pick a shape for the tag.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              Tag newTag = Tag(
+                  name: nameController.text,
+                  color: selectedColor,
+                  isPrimary: isPrimary,
+                  icon: selectedIcon);
+              Navigator.of(context).pop(newTag);
+            }
           },
           child: Text('Add Tag'),
         ),
       ],
     );
+  }
+  List<DropdownMenuItem<IconData>> buildShapeDropdownItems(Color color) {
+    List<IconData> shapeIcons = [
+      Icons.circle,
+      Icons.square_foot,
+      Icons.crop_square,
+      Icons.change_history,
+      Icons.arrow_forward,
+      Icons.rectangle,
+      Icons.filter_drama,
+      Icons.star,
+      Icons.pentagon,
+    ];
+    return shapeIcons.map((icon) {
+      return DropdownMenuItem<IconData>(
+        value: icon,
+        child: Row(
+          children: [
+            Icon(icon, color: color),
+            SizedBox(width: 8.0), // Adjust spacing as needed
+          ],
+        ),
+      );
+    }).toList();
   }
 }
