@@ -1,8 +1,8 @@
-import 'package:a_safe_place/Authentication/FirebaseAuthImplementation/firebase_auth_services.dart';
-import 'package:a_safe_place/Authentication/Widgets/form_container_widget.dart';
-import 'package:a_safe_place/Authentication/signup_page.dart';
-import 'package:a_safe_place/Global/Common/toast.dart';
-import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:a_safe_place/authentication/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:a_safe_place/authentication/widgets/form_container_widget.dart';
+import 'package:a_safe_place/authentication/signup_page.dart';
+import 'package:a_safe_place/Global/common/toast.dart';
+import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,8 +18,10 @@ class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController =
+      TextEditingController(text: "dave@gmail.com");
+  TextEditingController _passwordController =
+      TextEditingController(text: "123456");
 
   @override
   void dispose() {

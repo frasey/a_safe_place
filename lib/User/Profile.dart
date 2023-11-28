@@ -1,11 +1,10 @@
-import 'package:a_safe_place/Authentication/login_page.dart';
-import 'package:a_safe_place/Global/Common/toast.dart';
-import 'package:a_safe_place/Homepage/HomePage.dart';
+import 'package:a_safe_place/authentication/login_page.dart';
+import 'package:a_safe_place/Global/common/toast.dart';
+import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-
-import '../Tags/Tag.dart';
+import '../tags/tag.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -48,7 +47,7 @@ class Profile extends StatelessWidget {
                         duration: const Duration(milliseconds: 800),
                         reverseDuration: const Duration(milliseconds: 800),
                         child:
-                            const HomePage(), //TODO - this is calling the class rather than the page. I dont think it will work because it wants arguments
+                            const HomePage(), // TODO - this is calling the tag class rather than the page. I don't think it will work because it wants arguments
                       ),
                     ),
                   },
@@ -70,7 +69,7 @@ class Profile extends StatelessWidget {
                         duration: const Duration(milliseconds: 800),
                         reverseDuration: const Duration(milliseconds: 800),
                         child:
-                            const HomePage(), //TODO - this is calling the class rather than the page. I dont think it will work because it wants arguments
+                            const HomePage(), //TODO - this is calling the tag class rather than the page. I don't think it will work because it wants arguments
                       ),
                     ),
                   },
@@ -87,7 +86,7 @@ class Profile extends StatelessWidget {
                     FirebaseAuth.instance.signOut();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                     showToast(message: "User has been signed out");
 

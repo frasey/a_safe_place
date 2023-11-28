@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../User/Profile.dart';
+import '../User/profile.dart';
 
 class MenuTile extends StatelessWidget {
   final String title;
