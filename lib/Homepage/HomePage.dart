@@ -32,14 +32,14 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: () =>
-              {
-                Navigator.of(context).push(PageTransition(
-                  type: PageTransitionType.rightToLeftJoined,
-                  childCurrent: this,
-                  duration: const Duration(milliseconds: 800),
-                  reverseDuration: const Duration(milliseconds: 800),
-                  child: const Profile(),
+              onPressed: () => {
+                Navigator.of(context).push(
+                  PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    childCurrent: this,
+                    duration: const Duration(milliseconds: 800),
+                    reverseDuration: const Duration(milliseconds: 800),
+                    child: const Profile(),
                   ),
                 )
               },
@@ -57,13 +57,15 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Menu',
+                    Text(
+                      'Menu',
                       style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                     ),
-                    Text('USERNAME',   //TODO update to ${username}
+                    Text(
+                      'USERNAME', //TODO update to ${username}
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -71,13 +73,13 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              MenuTile(title: 'Home', linkedPage: HomePage() ),
-              MenuTile(title: 'Profile', linkedPage: Profile() ),
-              MenuTile(title: 'Your tags', linkedPage: HomePage() ),
-              MenuTile(title: 'Your docs/images', linkedPage: UserImages() ),
-              MenuTile(title: 'All events', linkedPage: AllEvents() ),
-              MenuTile(title: 'Create new event', linkedPage: Event() ),
-              MenuTile(title: 'Log out', linkedPage: Profile() )
+              MenuTile(title: 'Home', linkedPage: HomePage()),
+              MenuTile(title: 'Profile', linkedPage: Profile()),
+              MenuTile(title: 'Your tags', linkedPage: HomePage()),
+              MenuTile(title: 'Your docs/images', linkedPage: UserImages()),
+              MenuTile(title: 'All events', linkedPage: AllEvents()),
+              MenuTile(title: 'Create new event', linkedPage: Event()),
+              MenuTile(title: 'Log out', linkedPage: Profile())
             ],
           ),
         ),
