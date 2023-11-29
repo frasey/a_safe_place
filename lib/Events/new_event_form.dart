@@ -47,11 +47,13 @@ class _NewEventFormState extends State<NewEventForm> {
       }
     });
   }
+
   void updateAllUserTags(List<Tag> newTags) {
     setState(() {
       allUserTags.addAll(newTags);
     });
   }
+
   List<Widget> getSecondaryTagIcons(List<Tag> tags) {
     List<Widget> iconWidgets = [];
     for (Tag tag in tags) {
@@ -60,8 +62,8 @@ class _NewEventFormState extends State<NewEventForm> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-                tag.icon ?? Icons.error_outline,
-                color: tag.color,
+              tag.icon ?? Icons.error_outline,
+              color: tag.color,
             ),
           ),
         );
@@ -179,7 +181,8 @@ class _NewEventFormState extends State<NewEventForm> {
                                   return AlertDialog(
                                     content: SizedBox(
                                       height: 300,
-                                      child: DateTimePicker(callback: dateTimeChanged),
+                                      child: DateTimePicker(
+                                          callback: dateTimeChanged),
                                     ),
                                   );
                                 },
@@ -190,22 +193,22 @@ class _NewEventFormState extends State<NewEventForm> {
                               child: Center(
                                 child: Text(
                                   'Select Date and Time',
+                                  textAlign: TextAlign.center,
                                 ),
-
+                              ),
                             ),
                           ),
-                        ),
-                    ),// ADD TAG
+                        ), // ADD TAG
                         Expanded(
                           child: ElevatedButton(
                             child: const Text('Add tags'),
                             onPressed: () async {
                               await showAddTagDialog(
-                                  context,
-                                  allUserTags,
-                                  eventTags,
-                                  updateEventTags: updateEventTags,
-                                  updateAllUserTags: updateAllUserTags,
+                                context,
+                                allUserTags,
+                                eventTags,
+                                updateEventTags: updateEventTags,
+                                updateAllUserTags: updateAllUserTags,
                               );
                             },
                           ),
@@ -213,7 +216,6 @@ class _NewEventFormState extends State<NewEventForm> {
                       ],
                     ),
                   ),
-
 
                   // LOCATION
                   StandardInputField(
@@ -275,10 +277,16 @@ class _NewEventFormState extends State<NewEventForm> {
                             child: const Text('Upload'),
                           ),
                         ]),
-                  // SAVE FORM
+                    // SAVE FORM
                   ),
                   ElevatedButton(
-                    child: const Text('Create Event'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(200, 50),
+                    ),
+                    child: const Text(
+                      'Create Event',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
