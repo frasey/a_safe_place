@@ -32,8 +32,43 @@ class _NewEventFormState extends State<NewEventForm> {
   DateTime dateTime = DateTime.now();
   TimeOfDay timeOfDay = TimeOfDay.now();
 
+  // TAG THINGS
+  Color? selectedPrimaryTagColor;
   // !!!TEMPORARY TAG STORAGE!!!
-  List<Tag> selectedTags = [];
+  List<Tag> allUserTags = [];
+  List<Tag> eventTags = [];
+  void updateEventTags(List<Tag> selectedTags) {
+    setState(() {
+      eventTags.addAll(selectedTags);
+      for (Tag tag in selectedTags) {
+        if (tag.isPrimary) {
+          selectedPrimaryTagColor = tag.color;
+        }
+      }
+    });
+  }
+  void updateAllUserTags(List<Tag> newTags) {
+    setState(() {
+      allUserTags.addAll(newTags);
+    });
+  }
+  List<Widget> getSecondaryTagIcons(List<Tag> tags) {
+    List<Widget> iconWidgets = [];
+    for (Tag tag in tags) {
+      if (!tag.isPrimary) {
+        iconWidgets.add(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+                tag.icon ?? Icons.error_outline,
+                color: tag.color,
+            ),
+          ),
+        );
+      }
+    }
+    return iconWidgets;
+  }
 
   PlatformFile? pickedFile;
 
@@ -109,38 +144,76 @@ class _NewEventFormState extends State<NewEventForm> {
                       fontSize: 20,
                     ),
                   ),
-                  StandardInputField(
-                      name: 'Title (required)',
-                      keyboardType: TextInputType.text,
-                      maxLines: 1,
-                      controller: titleController,
-                      requireValidation: true),
-                  // DATE & TIME
-                  InkWell(
-                    onTap: () {
-                      // Show the DateTimePicker as a dialog
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            content: SizedBox(
-                              height: 300,
-                              child: DateTimePicker(callback: dateTimeChanged),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: const SizedBox(
-                      width: 300,
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          'Select Date and Time',
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    color: selectedPrimaryTagColor,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: getSecondaryTagIcons(eventTags),
                         ),
-                      ),
+                        // 'Title' input field
+                        StandardInputField(
+                          name: 'Title (required)',
+                          keyboardType: TextInputType.text,
+                          maxLines: 1,
+                          controller: titleController,
+                          requireValidation: true,
+                        ),
+                      ],
                     ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // DATE & TIME
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: SizedBox(
+                                      height: 300,
+                                      child: DateTimePicker(callback: dateTimeChanged),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: SizedBox(
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                  'Select Date and Time',
+                                ),
+
+                            ),
+                          ),
+                        ),
+                        // ADD TAG
+                        Expanded(
+                          child: ElevatedButton(
+                            child: const Text('Add tags'),
+                            onPressed: () async {
+                              await showAddTagDialog(
+                                  context,
+                                  allUserTags,
+                                  eventTags,
+                                  updateEventTags: updateEventTags,
+                                  updateAllUserTags: updateAllUserTags,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
 
                   // LOCATION
                   StandardInputField(
@@ -202,22 +275,6 @@ class _NewEventFormState extends State<NewEventForm> {
                             child: const Text('Upload'),
                           ),
                         ]),
-                  ),
-
-                  // ADD TAGS BUTTON
-                  ElevatedButton(
-                    child: const Text('Add tag'),
-                    onPressed: () async {
-                      Tag? newTag =
-                          await showAddTagDialog(context, selectedTags);
-                      if (newTag != null) {
-                        setState(() {
-                          selectedTags.add(newTag);
-                        });
-                      }
-                    },
-                  ),
-
                   // SAVE FORM
                   ElevatedButton(
                     child: const Text('Create Event'),
