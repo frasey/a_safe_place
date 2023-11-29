@@ -33,23 +33,25 @@ class _AllEventsState extends State<AllEvents> {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: SafeArea(
-            child: Column(
-              children: [
-                Text(
-                  'All Events',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                    'All Events',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text('Total Events: ${events.length}'),
-                SizedBox(height: 30),
-                ...events.map((event) => eventRow(event)),
+                  Text('Total Events: ${events.length}'),
+                  SizedBox(height: 30),
+                  ...events.map((event) => eventRow(event)),
 
-                //TODO search and filter functionality here
+                  //TODO search and filter functionality here
 
-                //TODO render list of all upcoming events here (or next 25 without filtering)
-              ],
+                  //TODO render list of all upcoming events here (or next 25 without filtering)
+                ],
+              ),
             ),
           ),
         ),
@@ -74,16 +76,19 @@ class _AllEventsState extends State<AllEvents> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
-            //add gesturedetector
             padding: const EdgeInsets.all(15.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(
-                  child: Text(
-                    event.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    overflow: TextOverflow.ellipsis,
+                GestureDetector(
+                  onTap: () {},
+                  child: Expanded(
+                    child: Text(
+                      event.name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
