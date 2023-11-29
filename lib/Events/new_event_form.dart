@@ -195,7 +195,7 @@ class _NewEventFormState extends State<NewEventForm> {
                             ),
                           ),
                         ),
-                        // ADD TAG
+                    ),// ADD TAG
                         Expanded(
                           child: ElevatedButton(
                             child: const Text('Add tags'),
@@ -276,6 +276,7 @@ class _NewEventFormState extends State<NewEventForm> {
                           ),
                         ]),
                   // SAVE FORM
+                  ),
                   ElevatedButton(
                     child: const Text('Create Event'),
                     onPressed: () async {
