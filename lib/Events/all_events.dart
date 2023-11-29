@@ -82,22 +82,21 @@ class _AllEventsState extends State<AllEvents> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).push(
-                    PageTransition(
-                      type: PageTransitionType.rightToLeftJoined,
-                      duration: const Duration(milliseconds: 800),
-                      reverseDuration: const Duration(milliseconds: 800),
-                      child: SingleEvent(eventId: '5v9XWVpV7HKMhyWNKOyd'),
-                      childCurrent: Container(),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).push(
+                      PageTransition(
+                        type: PageTransitionType.rightToLeftJoined,
+                        duration: const Duration(milliseconds: 800),
+                        reverseDuration: const Duration(milliseconds: 800),
+                        child: SingleEvent(eventId: '5v9XWVpV7HKMhyWNKOyd'),
+                        childCurrent: Container(),
+                      ),
                     ),
-                  ),
-                  child: Expanded(
                     child: Text(
                       event.name,
                       style: TextStyle(
-                        color: Color.fromARGB(250, 119, 104, 133),
-                        fontSize: 18,
+                        fontSize: 15,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -109,7 +108,8 @@ class _AllEventsState extends State<AllEvents> {
                     Text(
                       formatDay(event),
                       style: TextStyle(
-                          fontSize: 15), // change to show date in other format
+                        fontSize: 15,
+                      ), // change to show date in other format
                     ),
                     Text(formatDate(event),
                         style: TextStyle(fontSize: 15),

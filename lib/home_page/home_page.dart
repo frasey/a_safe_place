@@ -147,7 +147,13 @@ class HomePage extends StatelessWidget {
             //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
             const SizedBox(height: 40),
             ElevatedButton(
-              child: const Text('Create new event'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(300, 50),
+              ),
+              child: const Text(
+                'Create new event',
+                style: TextStyle(fontSize: 18),
+              ),
               // style: ElevatedButton.styleFrom(
               //   shape: RoundedRectangleBorder(
               //     borderRadius: BorderRadius.circular(100),
@@ -166,7 +172,13 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 40),
             // SEE ALL EVENTS
             ElevatedButton(
-              child: const Text('Show all events'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(300, 50),
+              ),
+              child: const Text(
+                'Show all events',
+                style: TextStyle(fontSize: 18),
+              ),
               onPressed: () => Navigator.of(context).push(PageTransition(
                 type: PageTransitionType.rightToLeftJoined,
                 childCurrent: this,

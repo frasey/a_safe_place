@@ -153,7 +153,13 @@ class _SingleEventState extends State<SingleEvent> {
         const SizedBox(height: 40),
         // SEE ALL EVENTS
         ElevatedButton(
-          child: const Text('Back to all events'),
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(200, 50),
+          ),
+          child: const Text(
+            'Back to all events',
+            style: TextStyle(fontSize: 18),
+          ),
           onPressed: () => Navigator.of(context).push(PageTransition(
             type: PageTransitionType.rightToLeftJoined,
             duration: const Duration(milliseconds: 800),
@@ -164,7 +170,13 @@ class _SingleEventState extends State<SingleEvent> {
         ),
         const SizedBox(height: 40),
         ElevatedButton(
-          child: const Text('Create new event'),
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(200, 50),
+          ),
+          child: const Text(
+            'Create new event',
+            style: TextStyle(fontSize: 18),
+          ),
           // style: ElevatedButton.styleFrom(
           //   shape: RoundedRectangleBorder(
           //     borderRadius: BorderRadius.circular(100),
