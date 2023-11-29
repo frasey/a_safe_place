@@ -1,8 +1,9 @@
+import 'package:a_safe_place/Events/show_single_event.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 import '../database/firebase_data_service.dart';
 import '../models/event_item.dart';
-
 
 class AllEvents extends StatefulWidget {
   const AllEvents({super.key});
@@ -41,6 +42,7 @@ class _AllEventsState extends State<AllEvents> {
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(250, 75, 184, 137),
                     ),
                   ),
                   Text('Total Events: ${events.length}'),
@@ -80,13 +82,23 @@ class _AllEventsState extends State<AllEvents> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
-                  onTap: () {},
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).push(
+                    PageTransition(
+                      type: PageTransitionType.rightToLeftJoined,
+                      duration: const Duration(milliseconds: 800),
+                      reverseDuration: const Duration(milliseconds: 800),
+                      child: SingleEvent(eventId: '5v9XWVpV7HKMhyWNKOyd'),
+                      childCurrent: Container(),
+                    ),
+                  ),
                   child: Expanded(
                     child: Text(
                       event.name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: TextStyle(
+                        color: Color.fromARGB(250, 119, 104, 133),
+                        fontSize: 18,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -99,11 +111,11 @@ class _AllEventsState extends State<AllEvents> {
                       style: TextStyle(
                           fontSize: 15), // change to show date in other format
                     ),
-                    Text(
-                      formatDate(event),
-                      style: TextStyle(
-                          fontSize: 15), // change to show date in other format
-                    ),
+                    Text(formatDate(event),
+                        style: TextStyle(fontSize: 15),
+                        overflow: TextOverflow
+                            .ellipsis // change to show date in other format
+                        ),
                   ],
                 ),
               ],

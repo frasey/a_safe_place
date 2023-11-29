@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:a_safe_place/models/tag.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventItem {
   String name;
@@ -14,13 +14,13 @@ class EventItem {
   // Tag tag;
 
   EventItem(
-      this.name,
-      this.dateTime,
-      this.location,
-      this.description,
-      this.contactName,
-      this.contactNumber,
-      );
+    this.name,
+    this.dateTime,
+    this.location,
+    this.description,
+    this.contactName,
+    this.contactNumber,
+  );
 
   // RETURN EVENT FROM DB
   static EventItem newFromJson(HashMap<String, dynamic> jsonFromDB) {
@@ -31,7 +31,8 @@ class EventItem {
     String contactName = jsonFromDB["contactName"];
     String contactNumber = jsonFromDB["contactNumber"];
     // Tag tag = jsonFromDB["tag"];
-    return EventItem(name, dateTime, location, description, contactName, contactNumber);
+    return EventItem(
+        name, dateTime, location, description, contactName, contactNumber);
   }
 
   // ADD EVENT TO DB
@@ -46,6 +47,4 @@ class EventItem {
       // if (tag != null) "tag": tag,
     };
   }
-
-
 }

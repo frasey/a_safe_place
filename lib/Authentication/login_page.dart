@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -64,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20),
                 const FaIcon(
-                  FontAwesomeIcons.userSecret,
+                  FontAwesomeIcons.houseLock,
                   size: 100,
                   color: Color.fromARGB(255, 75, 184, 137),
                 ),
