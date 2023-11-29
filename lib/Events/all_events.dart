@@ -96,7 +96,6 @@ class _AllEventsState extends State<AllEvents> {
                     child: Text(
                       event.name,
                       style: TextStyle(
-                        color: Color.fromARGB(250, 119, 104, 133),
                         fontSize: 15,
                       ),
                       overflow: TextOverflow.ellipsis,
