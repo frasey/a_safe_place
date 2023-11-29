@@ -1,3 +1,4 @@
+import 'package:a_safe_place/Events/all_events.dart';
 import 'package:a_safe_place/authentication/login_page.dart';
 import 'package:a_safe_place/Global/common/toast.dart';
 import 'package:a_safe_place/home_page/home_page.dart';
@@ -29,15 +30,16 @@ class Profile extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
+                SizedBox(height: 40),
 
                 const Text(
-                  'USERNAME', //$user.name
+                  'My Profile', //$user.name
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
+                SizedBox(height: 30),
                 // MY TAGS BUTTON
                 TextButton(
                   onPressed: () => {
@@ -70,7 +72,7 @@ class Profile extends StatelessWidget {
                         duration: const Duration(milliseconds: 800),
                         reverseDuration: const Duration(milliseconds: 800),
                         child:
-                            const HomePage(), //TODO - this is calling the tag class rather than the page. I don't think it will work because it wants arguments
+                            const AllEvents(), //TODO - this is calling the tag class rather than the page. I don't think it will work because it wants arguments
                       ),
                     ),
                   },
@@ -87,7 +89,8 @@ class Profile extends StatelessWidget {
                     FirebaseAuth.instance.signOut();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
                     );
                     showToast(message: "User has been signed out");
 
