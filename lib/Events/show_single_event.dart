@@ -9,7 +9,9 @@ import 'package:page_transition/page_transition.dart';
 import '../models/event_item.dart';
 
 class SingleEvent extends StatefulWidget {
-  const SingleEvent({super.key});
+  final String eventId;
+
+  const SingleEvent({required this.eventId, Key? key}) : super(key: key);
 
   @override
   State<SingleEvent> createState() => _SingleEventState();
@@ -23,7 +25,7 @@ class _SingleEventState extends State<SingleEvent> {
     super.initState();
 
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      EventItem? thisEvent = await FBDataService.getOneEvent();
+      EventItem? thisEvent = await FBDataService.getEventById(widget.eventId);
       setState(() {
         myEvent = thisEvent;
       });

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:a_safe_place/Events/all_events.dart';
 import 'package:a_safe_place/Events/show_single_event.dart';
 import 'package:a_safe_place/authentication/login_page.dart';
 import 'package:a_safe_place/features/splash_screen.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'A Safe Place',
-      home: SplashScreen(child: SingleEvent()),
+      home: SplashScreen(child: HomePage()),
     );
   }
 }
