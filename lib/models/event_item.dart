@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+
 class EventItem {
   String name;
   DateTime dateTime;
@@ -12,7 +13,7 @@ class EventItem {
   static EventItem newFromJson(HashMap<String, dynamic> jsonFromDB) {
     String name = jsonFromDB["name"];
     DateTime dateTime = jsonFromDB["dateTime"];
-    return new EventItem(name, dateTime);
+    return EventItem(name, dateTime);
   }
 
   Map<String, dynamic> toJson() {

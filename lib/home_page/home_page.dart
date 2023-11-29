@@ -2,10 +2,10 @@ import 'package:a_safe_place/events/new_event_form.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'menu_tile.dart';
-import '../events/new_event_form.dart';
 import 'package:a_safe_place/user/profile.dart';
 import 'package:a_safe_place/events/all_events.dart';
 import 'package:a_safe_place/user/user_images.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

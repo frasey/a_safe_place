@@ -1,5 +1,6 @@
 import 'event_item.dart';
-import '../tags/tag.dart';
+import 'tag.dart';
+
 
 class UserInfo{
   String userName;
