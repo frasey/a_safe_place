@@ -11,7 +11,7 @@ class EventItem {
   String contactName;
   String contactNumber;
   // images
-  Tag tag;
+  // Tag tag;
 
   EventItem(
       this.name,
@@ -20,7 +20,7 @@ class EventItem {
       this.description,
       this.contactName,
       this.contactNumber,
-      this.tag);
+      );
 
   // RETURN EVENT FROM DB
   static EventItem newFromJson(HashMap<String, dynamic> jsonFromDB) {
@@ -30,8 +30,8 @@ class EventItem {
     String description = jsonFromDB["description"];
     String contactName = jsonFromDB["contactName"];
     String contactNumber = jsonFromDB["contactNumber"];
-    Tag tag = jsonFromDB["tag"];
-    return EventItem(name, dateTime, location, description, contactName, contactNumber, tag);
+    // Tag tag = jsonFromDB["tag"];
+    return EventItem(name, dateTime, location, description, contactName, contactNumber);
   }
 
   // ADD EVENT TO DB
@@ -43,7 +43,7 @@ class EventItem {
       if (description != null) "description": description,
       if (contactName != null) "contactName": contactName,
       if (contactNumber != null) "contactNumber": contactNumber,
-      if (tag != null) "tag": tag,
+      // if (tag != null) "tag": tag,
     };
   }
 

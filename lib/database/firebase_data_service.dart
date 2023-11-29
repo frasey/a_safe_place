@@ -29,8 +29,8 @@ class FBDataService {
             dataMap['location'],
             dataMap ['description'],
             dataMap['contactName'],
-            dataMap['contactNumber'],
-            dataMap['tag']
+            dataMap['contactNumber']
+            // dataMap['tag']
         );
         itemsFromDB.add(eventItem);
       }
