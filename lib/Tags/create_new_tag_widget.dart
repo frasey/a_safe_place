@@ -22,66 +22,67 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Add a new tag'),
-      content: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  color: isPrimary ? selectedColor : null,
-                  child: Stack(
-                    children: [
-                      TextField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          labelText: 'Tag name',
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      if (!isPrimary && selectedIcon != null)
-                        Positioned(
-                          right: 8.0,
-                          top: 8.0,
-                          child: Container(
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              selectedIcon,
-                              color:  isPrimary ? Colors.transparent : selectedColor,
-                            ),
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: isPrimary ? selectedColor : null,
+                    child: Stack(
+                      children: [
+                        TextField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Tag name',
+                            border: OutlineInputBorder(),
                           ),
                         ),
-                    ],
+                        if (!isPrimary && selectedIcon != null)
+                          Positioned(
+                            right: 8.0,
+                            top: 8.0,
+                            child: Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                ),
+                              child: Icon(
+                                selectedIcon,
+                                color:  isPrimary ? Colors.transparent : selectedColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Text('Tag Color:'),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () async {
-                  Color pickedColor = await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Pick a colour'),
-                        content: SingleChildScrollView(
-                          child: BlockPicker(
-                            availableColors: isPrimary ? DesignService.getPrimaryColours() : DesignService.getSecondaryColours(),
-                            pickerColor: selectedColor,
-                            onColorChanged: (color) {
-                              setState(() {
-                                selectedColor = color;
-                                initialShapeColor = color;
-                              });
-                            },
+              ],
+            ),
+            Row(
+              children: [
+                const Text('Tag Color:'),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () async {
+                    Color pickedColor = await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Pick a colour'),
+                          content: SingleChildScrollView(
+                            child: BlockPicker(
+                              availableColors: isPrimary ? DesignService.getPrimaryColours() : DesignService.getSecondaryColours(),
+                              pickerColor: selectedColor,
+                              onColorChanged: (color) {
+                                setState(() {
+                                  selectedColor = color;
+                                  initialShapeColor = color;
+                                  });
+                               },
+                            ),
                           ),
-                        ),
                         actions: [
                           TextButton(
                             onPressed: () {
@@ -127,6 +128,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
               ],
             ),
         ],
+      ),
       ),
       actions: [
         TextButton(
