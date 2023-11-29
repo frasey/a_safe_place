@@ -226,7 +226,7 @@ class _NewEventFormState extends State<NewEventForm> {
                         saveToDB();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Great!'),
+                            content: Text('Saved!'),
                           ),
                         );
                         _formKey.currentState!.reset();
@@ -252,8 +252,17 @@ class _NewEventFormState extends State<NewEventForm> {
 
   // can save a thing with this func?
   Future<void> saveToDB() async {
-    DateTime combineDateTime = new DateTime( dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour, timeOfDay.minute);
-    EventItem newEvent = new EventItem(titleController.value.text, combineDateTime);
+    DateTime combineDateTime = DateTime( dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour, timeOfDay.minute);
+    EventItem newEvent = EventItem(
+      titleController.value.text,
+      combineDateTime,
+      locationController.value.text,
+      descriptionController.value.text,
+      //reminderController.value.text,
+      contactNameController.value.text,
+      contactNumberController.value.text,
+      // TODO tag needs to go in here somehow
+    );
     FBDataService.addEvent(newEvent);
   }
 

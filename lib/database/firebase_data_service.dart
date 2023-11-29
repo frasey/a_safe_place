@@ -23,7 +23,15 @@ class FBDataService {
       if (dataMap is Map) {
         // add a type check to ensure dataMap is a Map
         DateTime dateTimeObject = dataMap['dateTime'].toDate();
-        EventItem eventItem = new EventItem(dataMap['name'], dateTimeObject);
+        EventItem eventItem = EventItem(
+            dataMap['name'],
+            dateTimeObject,
+            dataMap['location'],
+            dataMap ['description'],
+            dataMap['contactName'],
+            dataMap['contactNumber']
+            // dataMap['tag']
+        );
         itemsFromDB.add(eventItem);
       }
     }

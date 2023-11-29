@@ -21,7 +21,6 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Add a new tag'),
       content: SingleChildScrollView(
         child: Column(
           children: [
@@ -57,7 +56,6 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                       ],
                     ),
                   ),
-                ),
               ],
             ),
             Row(
