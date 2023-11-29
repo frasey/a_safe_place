@@ -3,12 +3,19 @@ import 'package:a_safe_place/tags/create_new_tag_dialog.dart';
 import 'package:a_safe_place/models/tag.dart';
 
 
-Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) async {
+Future<void> showAddTagDialog(
+    BuildContext context,
+    List<Tag> allUserTags,
+    {required Function(List<Tag>) updateEventTags}
+   ) async {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
 
   List<DropdownMenuItem<Tag?>> items = [];
+  List<Tag> selectedTags = [];
 
-  if (existingTags.isNotEmpty) {
-    for (var tag in existingTags) {
+  if (allUserTags.isNotEmpty) {
+    for (var tag in allUserTags) {
       items.add(
         DropdownMenuItem(
           value: tag,
@@ -33,32 +40,75 @@ Future<Tag?> showAddTagDialog(BuildContext context, List<Tag> existingTags) asyn
     ));
   }
 
-  Tag? newTag = await showDialog<Tag?>(
+  await showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Add a tag'),
-        content: Column(
-          children: [
-            DropdownButton<Tag?>(
-              hint: const Text('Select existing tag'),
-              items: items,
-              onChanged: (Tag? selectedTag) {
-                Navigator.of(context).pop(selectedTag);
-              },
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            key: formKey,
+            title: const Text('Add tags'),
+            content: Column(
+              children: [
+                DropdownButton<Tag?>(
+                  hint: const Text('Choose from your tags'),
+                  items: items,
+                  onChanged: (Tag? selectedTag) {
+                    setState(() {
+                      if (selectedTag != null) {
+                        selectedTags.add(selectedTag);
+                      }
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('Create new tag'),
+                  onPressed: () async {
+                    Tag? newTag = await showCreateNewTagDialog(context);
+                    if (newTag != null) {
+                      setState(() {
+                        allUserTags.add(newTag);
+                        selectedTags.add(newTag);
+                      });
+                    }
+                  },
+                ),
+                if (selectedTags.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      const Text('Selected tags:'),
+                      for (var selectedTag in selectedTags)
+                        Container(
+                          width: 200,
+                          child: ListTile(
+                            title: Text(selectedTag.name),
+                            tileColor: selectedTag.isPrimary ? selectedTag.color : null,
+                            leading: selectedTag.isPrimary
+                                ? null
+                                : Icon(
+                              selectedTag.icon,
+                              color: selectedTag.color,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+              ],
             ),
-            ElevatedButton(
-              child: const Text('Create new tag'),
-              onPressed: () async {
-                Tag? newTag = await showCreateNewTagDialog(context);
-                if (newTag != null) {
-                  existingTags.add(newTag);
-                  Navigator.of(context).pop(newTag);
-                }
-              },
-            ),
-          ],
-        ),
+            actions: [
+              ElevatedButton(
+                onPressed: () async {
+                  formKey.currentState?.save();
+                  updateEventTags(selectedTags);
+                  Navigator.of(context).pop(selectedTags);
+                },
+                child: const Text('Add tags'),
+              ),
+            ],
+          );
+        },
       );
     },
   );

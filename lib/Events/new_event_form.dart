@@ -34,7 +34,13 @@ class _NewEventFormState extends State<NewEventForm> {
   TimeOfDay timeOfDay = TimeOfDay.now();
 
   // !!!TEMPORARY TAG STORAGE!!!
-  List<Tag> selectedTags = [];
+  List<Tag> allUserTags = [];
+  List<Tag> eventTags = [];
+  void updateEventTags(List<Tag> selectedTags) {
+    setState(() {
+      eventTags = selectedTags;
+    });
+  }
 
   PlatformFile? pickedFile;
 
@@ -116,32 +122,51 @@ class _NewEventFormState extends State<NewEventForm> {
                       maxLines: 1,
                       controller: titleController,
                       requireValidation: true),
-                  // DATE & TIME
-                  InkWell(
-                    onTap: () {
-                      // Show the DateTimePicker as a dialog
-                      showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return  AlertDialog(
-                          content: SizedBox(
-                            height: 300,
-                            child:  DateTimePicker( callback: dateTimeChanged ),
+
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // DATE & TIME
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: SizedBox(
+                                      height: 300,
+                                      child: DateTimePicker(callback: dateTimeChanged),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: SizedBox(
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                  'Select Date and Time',
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                      );
-                    },
-                    child: const SizedBox(
-                      width: 300,
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          'Select Date and Time',
+                          ),
                         ),
-                      ),
+                        // ADD TAG
+                        Expanded(
+                          child: ElevatedButton(
+                            child: const Text('Add tags'),
+                            onPressed: () async {
+                              await showAddTagDialog(context, allUserTags, updateEventTags: updateEventTags);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
 
                   // LOCATION
                   StandardInputField(
@@ -204,20 +229,6 @@ class _NewEventFormState extends State<NewEventForm> {
                           ),
                         ]),
                   ),
-
-                  // ADD TAGS BUTTON
-                  ElevatedButton(
-                        child: const Text('Add tag'),
-                        onPressed: () async {
-                        Tag? newTag = await showAddTagDialog(context, selectedTags);
-                        if (newTag != null) {
-                          setState(() {
-                            selectedTags.add(newTag);
-                          });
-                        }
-                      },
-                  ),
-
                   // SAVE FORM
                   ElevatedButton(
                     onPressed: () {

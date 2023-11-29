@@ -56,6 +56,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                       ],
                     ),
                   ),
+                ),
               ],
             ),
             Row(
