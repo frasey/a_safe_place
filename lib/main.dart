@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'A Safe Place',
-      home: SplashScreen(child: HomePage()),
+      home: SplashScreen(child: LoginPage()),
     );
   }
 }

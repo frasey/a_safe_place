@@ -32,23 +32,25 @@ class _AllEventsState extends State<AllEvents> {
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: SafeArea(
-            child: Column(
-              children: [
-                Text(
-                  'All Events',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Text(
+                    'All Events',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text('Total Events: ${events.length}'),
-                SizedBox(height: 30),
-                ...events.map((event) => eventRow(event)),
+                  Text('Total Events: ${events.length}'),
+                  SizedBox(height: 30),
+                  ...events.map((event) => eventRow(event)),
 
-                //TODO search and filter functionality here
+                  //TODO search and filter functionality here
 
-                //TODO render list of all upcoming events here (or next 25 without filtering)
-              ],
+                  //TODO render list of all upcoming events here (or next 25 without filtering)
+                ],
+              ),
             ),
           ),
         ),

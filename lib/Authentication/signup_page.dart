@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -41,107 +42,116 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "A Safe Place",
-                style: GoogleFonts.nunitoSans(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "A Safe Place",
+                  style: GoogleFonts.nunitoSans(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    color: Color.fromARGB(255, 75, 184, 137),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const FaIcon(
+                  FontAwesomeIcons.userSecret,
+                  size: 100,
                   color: Color.fromARGB(255, 75, 184, 137),
                 ),
-              ),
-              const SizedBox(height: 20),
-              const FaIcon(
-                FontAwesomeIcons.userSecret,
-                size: 100,
-                color: Color.fromARGB(255, 75, 184, 137),
-              ),
-              const SizedBox(height: 50),
-              const Text(
-                "Sign Up",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 26, 58, 58),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              FormContainerWidget(
-                controller: _usernameController,
-                hintText: "Username",
-                isPasswordField: false,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              FormContainerWidget(
-                controller: _emailController,
-                hintText: "Email",
-                isPasswordField: false,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              FormContainerWidget(
-                controller: _passwordController,
-                hintText: "Password",
-                isPasswordField: true,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _signUp();
-                },
-                child: Container(
-                    width: double.infinity,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 119, 104, 133),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                        child: _isSigningUp
-                            ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : const Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ))),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Already have an account?"),
-                  const SizedBox(
-                    width: 5,
+                const SizedBox(height: 50),
+                const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 26, 58, 58),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                          (route) => false);
-                    },
-                    child: const Text("Login",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 75, 184, 137),
-                            fontWeight: FontWeight.bold)),
-                  )
-                ],
-              )
-            ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                FormContainerWidget(
+                  controller: _usernameController,
+                  hintText: "Username",
+                  isPasswordField: false,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FormContainerWidget(
+                  controller: _emailController,
+                  hintText: "Email",
+                  isPasswordField: false,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FormContainerWidget(
+                  controller: _passwordController,
+                  hintText: "Password",
+                  isPasswordField: true,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _signUp();
+                  },
+                  child: Container(
+                      width: double.infinity,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 119, 104, 133),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                          child: _isSigningUp
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have an account?"),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.leftToRightJoined,
+                              duration: const Duration(milliseconds: 800),
+                              reverseDuration:
+                                  const Duration(milliseconds: 800),
+                              child: LoginPage(),
+                              childCurrent: Container(),
+                            ),
+                            (route) => false);
+                      },
+                      child: const Text("Login",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 75, 184, 137),
+                              fontWeight: FontWeight.bold)),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
