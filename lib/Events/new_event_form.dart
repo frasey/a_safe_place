@@ -11,7 +11,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../database/firebase_data_service.dart';
 import 'date_time_picker.dart';
 
-
 class NewEventForm extends StatefulWidget {
   const NewEventForm({Key? key}) : super(key: key);
 
@@ -104,7 +103,7 @@ class _NewEventFormState extends State<NewEventForm> {
   // DateTime selectedDate = DateTime.now();
   // TimeOfDay selectedTime = TimeOfDay.now();
 
-  void dateTimeChanged(DateTime newDate, TimeOfDay newTime){
+  void dateTimeChanged(DateTime newDate, TimeOfDay newTime) {
     print("callback!");
     setState(() {
       dateTime = newDate;
@@ -192,7 +191,7 @@ class _NewEventFormState extends State<NewEventForm> {
                                 child: Text(
                                   'Select Date and Time',
                                 ),
-                              ),
+
                             ),
                           ),
                         ),
@@ -276,10 +275,10 @@ class _NewEventFormState extends State<NewEventForm> {
                             child: const Text('Upload'),
                           ),
                         ]),
-                  ),
                   // SAVE FORM
                   ElevatedButton(
-                    onPressed: () {
+                    child: const Text('Create Event'),
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         //if currentState value is true, then trigger the scaffold messenger to trigger the validator of every text form field
                         saveToDB();
@@ -291,7 +290,6 @@ class _NewEventFormState extends State<NewEventForm> {
                         _formKey.currentState!.reset();
                       }
                     },
-                    child: const Text('Save'),
                   ),
                 ],
               ),
@@ -311,7 +309,8 @@ class _NewEventFormState extends State<NewEventForm> {
 
   // can save a thing with this func?
   Future<void> saveToDB() async {
-    DateTime combineDateTime = DateTime( dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour, timeOfDay.minute);
+    DateTime combineDateTime = DateTime(dateTime.year, dateTime.month,
+        dateTime.day, timeOfDay.hour, timeOfDay.minute);
     EventItem newEvent = EventItem(
       titleController.value.text,
       combineDateTime,

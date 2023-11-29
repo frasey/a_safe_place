@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   final Widget? child;
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -38,14 +38,14 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           SizedBox(height: 50),
           FaIcon(
-            FontAwesomeIcons.userSecret,
+            FontAwesomeIcons.houseLock,
             size: 100,
             color: Color.fromARGB(255, 75, 184, 137),
           ),
           SizedBox(height: 40),
           Text(
             "A Safe Place",
-            style: TextStyle(
+            style: GoogleFonts.nunitoSans(
                 fontWeight: FontWeight.bold,
                 fontSize: 35,
                 color: Color.fromARGB(255, 75, 184, 137)),

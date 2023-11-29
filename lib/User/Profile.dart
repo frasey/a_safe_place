@@ -4,9 +4,9 @@ import 'package:a_safe_place/Global/common/toast.dart';
 import 'package:a_safe_place/home_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import '../models/tag.dart';
-
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -23,7 +23,7 @@ class Profile extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 50,
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Color.fromARGB(255, 75, 184, 137),
                   child: Icon(
                     Icons.person,
                     size: 60,
@@ -32,11 +32,12 @@ class Profile extends StatelessWidget {
                 ),
                 SizedBox(height: 40),
 
-                const Text(
+                Text(
                   'My Profile', //$user.name
-                  style: TextStyle(
+                  style: GoogleFonts.nunitoSans(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 75, 184, 137),
                   ),
                 ),
                 SizedBox(height: 30),

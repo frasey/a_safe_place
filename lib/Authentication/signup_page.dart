@@ -9,7 +9,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -55,13 +54,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     color: Color.fromARGB(255, 75, 184, 137),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 const FaIcon(
-                  FontAwesomeIcons.userSecret,
+                  FontAwesomeIcons.houseLock,
                   size: 100,
                   color: Color.fromARGB(255, 75, 184, 137),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 const Text(
                   "Sign Up",
                   style: TextStyle(

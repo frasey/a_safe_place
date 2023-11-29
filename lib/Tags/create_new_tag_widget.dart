@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:a_safe_place/models/tag.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-
 class CreateNewTagDialog extends StatefulWidget {
   const CreateNewTagDialog({super.key});
 
@@ -46,10 +45,12 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                               padding: EdgeInsets.all(8.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                ),
+                              ),
                               child: Icon(
                                 selectedIcon,
-                                color:  isPrimary ? Colors.transparent : selectedColor,
+                                color: isPrimary
+                                    ? Colors.transparent
+                                    : selectedColor,
                               ),
                             ),
                           ),
@@ -72,62 +73,64 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
                           title: Text('Pick a colour'),
                           content: SingleChildScrollView(
                             child: BlockPicker(
-                              availableColors: isPrimary ? DesignService.getPrimaryColours() : DesignService.getSecondaryColours(),
+                              availableColors: isPrimary
+                                  ? DesignService.getPrimaryColours()
+                                  : DesignService.getSecondaryColours(),
                               pickerColor: selectedColor,
                               onColorChanged: (color) {
                                 setState(() {
                                   selectedColor = color;
                                   initialShapeColor = color;
-                                  });
-                               },
+                                });
+                              },
                             ),
                           ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(selectedColor);
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: Text('Choose colour'),
-                style: ElevatedButton.styleFrom(
-                  primary: selectedColor,
-                ),
-              ),
-            ],
-          ),
-          CheckboxListTile(
-            title: const Text('Primary tag'),
-            value: isPrimary,
-            onChanged: (value) {
-              setState(() {
-                isPrimary = value ?? false;
-              });
-            },
-          ),
-          if (!isPrimary)
-            Row(
-              children: [
-                const Text('Tag shape:'),
-                const SizedBox(width: 10),
-                DropdownButton<IconData>(
-                  value: selectedIcon,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedIcon = value ?? Icons.circle;
-                    });
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(selectedColor);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
-                  items: buildShapeDropdownItems(initialShapeColor),
+                  child: Text('Choose colour'),
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedColor,
+                  ),
                 ),
               ],
             ),
-        ],
-      ),
+            CheckboxListTile(
+              title: const Text('Primary tag'),
+              value: isPrimary,
+              onChanged: (value) {
+                setState(() {
+                  isPrimary = value ?? false;
+                });
+              },
+            ),
+            if (!isPrimary)
+              Row(
+                children: [
+                  const Text('Tag shape:'),
+                  const SizedBox(width: 10),
+                  DropdownButton<IconData>(
+                    value: selectedIcon,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedIcon = value ?? Icons.circle;
+                      });
+                    },
+                    items: buildShapeDropdownItems(initialShapeColor),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
       actions: [
         TextButton(
@@ -170,6 +173,7 @@ class _CreateNewTagDialogState extends State<CreateNewTagDialog> {
       ],
     );
   }
+
   List<DropdownMenuItem<IconData>> buildShapeDropdownItems(Color color) {
     List<IconData> shapeIcons = [
       Icons.circle,
