@@ -1,8 +1,6 @@
 import 'package:a_safe_place/Events/all_events.dart';
 import 'package:a_safe_place/Events/new_event_form.dart';
 import 'package:a_safe_place/database/firebase_data_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
