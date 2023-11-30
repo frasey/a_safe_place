@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Username', //TODO update to ${username}
+                      'Hi Walter', //TODO update to ${username}
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -131,69 +131,74 @@ class HomePage extends StatelessWidget {
         ),
 
         // HOMEPAGE BODY
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // NEXT EVENT PREVIEW
-            const SizedBox(height: 20),
-            const Placeholder(
-              fallbackHeight: 80,
-              fallbackWidth: 150,
-            ),
-            // When functionality for the above section has been added, include below code for route animation:
-            // onPressed: () => Navigator.of(context).push(PageTransition(
-            //                 type: PageTransitionType.scale,
-            //                 alignment: Alignment.topCenter,
-            //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 50),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // NEXT EVENT PREVIEW
+              const SizedBox(height: 20),
+              const FaIcon(
+                FontAwesomeIcons.houseLock,
+                size: 100,
+                color: Color.fromARGB(255, 75, 184, 137),
               ),
-              child: const Text(
-                'Create new event',
-                style: TextStyle(fontSize: 18),
+
+              // When functionality for the above section has been added, include below code for route animation:
+              // onPressed: () => Navigator.of(context).push(PageTransition(
+              //                 type: PageTransitionType.scale,
+              //                 alignment: Alignment.topCenter,
+              //                 child: const PAGE-YOU-WANT-TO-LINK-TO(),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(300, 50),
+                ),
+                child: const Text(
+                  'Create new event',
+                  style: TextStyle(fontSize: 18),
+                ),
+                // style: ElevatedButton.styleFrom(
+                //   shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(100),
+                //   ),
+                // ),
+                onPressed: () => Navigator.of(context).push(
+                  PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    childCurrent: this,
+                    duration: const Duration(milliseconds: 800),
+                    reverseDuration: const Duration(milliseconds: 800),
+                    child: NewEventForm(),
+                  ),
+                ),
               ),
-              // style: ElevatedButton.styleFrom(
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(100),
-              //   ),
-              // ),
-              onPressed: () => Navigator.of(context).push(
-                PageTransition(
+              const SizedBox(height: 40),
+              // SEE ALL EVENTS
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(300, 50),
+                ),
+                child: const Text(
+                  'Show all events',
+                  style: TextStyle(fontSize: 18),
+                ),
+                onPressed: () => Navigator.of(context).push(PageTransition(
                   type: PageTransitionType.rightToLeftJoined,
                   childCurrent: this,
                   duration: const Duration(milliseconds: 800),
                   reverseDuration: const Duration(milliseconds: 800),
-                  child: NewEventForm(),
-                ),
+                  child: const AllEvents(),
+                )),
               ),
-            ),
-            const SizedBox(height: 40),
-            // SEE ALL EVENTS
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 50),
-              ),
-              child: const Text(
-                'Show all events',
-                style: TextStyle(fontSize: 18),
-              ),
-              onPressed: () => Navigator.of(context).push(PageTransition(
-                type: PageTransitionType.rightToLeftJoined,
-                childCurrent: this,
-                duration: const Duration(milliseconds: 800),
-                reverseDuration: const Duration(milliseconds: 800),
-                child: const AllEvents(),
-              )),
-            ),
-            // NOTES
-            // TODO space for user notes here
-            // const Placeholder(
-            //   fallbackHeight: 80,
-            //   fallbackWidth: 150,
-            // ),
-          ],
+              // NOTES
+              // TODO space for user notes here
+              // const Placeholder(
+              //   fallbackHeight: 80,
+              //   fallbackWidth: 150,
+              // ),
+            ],
+          ),
         ));
   }
 }
