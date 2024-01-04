@@ -40,8 +40,7 @@ This app is still a work in progress, and ideally I would like to make it availa
 | Change time | Add tags | Colour selector |
 | <img width="410" alt="Primary tag" src="https://github.com/frasey/a_safe_place/assets/129194569/44a8abf0-36e2-4dc3-a010-bef9a543518d"> | <img width="410" alt="Secondary tag" src="https://github.com/frasey/a_safe_place/assets/129194569/f9895827-502c-48b4-a91d-89696118d15e"> | <img width="410" alt="Tag selector" src="https://github.com/frasey/a_safe_place/assets/129194569/42b419d8-19e9-4dfa-bf67-b321c5b5000c"> |
 | Primary tag | Secondary tag | Selected tags |
-| <img width="420" alt="Applied tag" src="https://github.com/frasey/a_safe_place/assets/129194569/eef924a2-e87b-4cef-b02a-1318a06bb879"> | 
-<img width="413" alt="All events" src="https://github.com/frasey/a_safe_place/assets/129194569/d02a76db-b6b1-4a83-ad50-e4c963eee5b9"> |   |
+| <img width="420" alt="Applied tag" src="https://github.com/frasey/a_safe_place/assets/129194569/eef924a2-e87b-4cef-b02a-1318a06bb879"> | <img width="413" alt="All events" src="https://github.com/frasey/a_safe_place/assets/129194569/d02a76db-b6b1-4a83-ad50-e4c963eee5b9"> |   |
 | Applied tags | All events |    |
 
 
