@@ -30,8 +30,20 @@ This app is still a work in progress, and ideally I would like to make it availa
 
 |          |           |           |
 | -------- | --------- | --------- |
-| <img width="410" alt="Welcome" src="https://github.com/frasey/a_safe_place/assets/129194569/66f55748-ec40-4ff9-8c10-0a525fc3910c"> | <img width="410" alt="Signup" src="https://github.com/frasey/a_safe_place/assets/129194569/fdc8ee05-3125-48e7-b6e8-23913b430c2f"> | <img width="410" alt="Homepage" src="https://github.com/frasey/a_safe_place/assets/129194569/938d39da-71dc-41c6-8d86-78c9f03955da"> |
-| Welcome | Signup | Homepage |
+| <img width="410" alt="Welcome" src="https://github.com/frasey/a_safe_place/assets/129194569/66f55748-ec40-4ff9-8c10-0a525fc3910c"> | <img width="410" alt="Signup" src="https://github.com/frasey/a_safe_place/assets/129194569/fdc8ee05-3125-48e7-b6e8-23913b430c2f"> | <img width="410" alt="Login" src="https://github.com/frasey/a_safe_place/assets/129194569/fb0f4489-7b4c-44ee-9ccf-651984c181cd"> |
+| Welcome | Signup | Login |
+| <img width="410" alt="Homepage" src="https://github.com/frasey/a_safe_place/assets/129194569/938d39da-71dc-41c6-8d86-78c9f03955da"> | <img width="410" alt="Menu" src="https://github.com/frasey/a_safe_place/assets/129194569/f198646f-943a-4fbf-afe8-5495b5b5a612"> | <img width="410" alt="Profile" src="https://github.com/frasey/a_safe_place/assets/129194569/e62affba-5f3f-446e-aee9-b0f220fce3fe"> |
+| Homepage | Menu | Profile
+| <img width="410" alt="Create new (with text)" src="https://github.com/frasey/a_safe_place/assets/129194569/a8bb902a-6422-4b1e-97ff-5d29d6c7581c"> | <img width="410" alt="Add date and time" src="https://github.com/frasey/a_safe_place/assets/129194569/15712279-93af-4ded-909c-5d4da0649e20"> | <img width="410" alt="Change date" src="https://github.com/frasey/a_safe_place/assets/129194569/fbd05956-3bc9-4857-987f-6e5e4daefcfa"> |
+| Create new | Add date/time | Change date |
+| <img width="410" alt="Change time" src="https://github.com/frasey/a_safe_place/assets/129194569/fb11d5f9-723e-4060-9d8d-b1ac337791d1"> | <img width="410" alt="Add tags" src="https://github.com/frasey/a_safe_place/assets/129194569/4cacb933-a83d-4c53-9fa7-d8d0c1d088fb"> | <img width="410" alt="Tag colour selector" src="https://github.com/frasey/a_safe_place/assets/129194569/1daadaa4-7c33-47ad-895b-d1367c3fdba1"> |
+| Change time | Add tags | Colour selector |
+| <img width="410" alt="Primary tag" src="https://github.com/frasey/a_safe_place/assets/129194569/44a8abf0-36e2-4dc3-a010-bef9a543518d"> | <img width="410" alt="Secondary tag" src="https://github.com/frasey/a_safe_place/assets/129194569/f9895827-502c-48b4-a91d-89696118d15e"> | <img width="410" alt="Tag selector" src="https://github.com/frasey/a_safe_place/assets/129194569/42b419d8-19e9-4dfa-bf67-b321c5b5000c"> |
+| Primary tag | Secondary tag | Selected tags |
+| <img width="420" alt="Applied tag" src="https://github.com/frasey/a_safe_place/assets/129194569/eef924a2-e87b-4cef-b02a-1318a06bb879"> | 
+<img width="413" alt="All events" src="https://github.com/frasey/a_safe_place/assets/129194569/d02a76db-b6b1-4a83-ad50-e4c963eee5b9"> |   |
+| Applied tags | All events |    |
+
 
 
 ## Prerequisits
